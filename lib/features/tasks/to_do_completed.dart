@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../core/servies/preferences_manager.dart';
-import '../modles/taskmodel.dart';
-import '../widgets/sillver_task_list.dart';
-import '../widgets/task_list.dart';
+import '../../core/servies/preferences_manager.dart';
+import '../../modles/taskmodel.dart';
+import '../../core/components/sillver_task_list.dart';
+import '../../core/components/task_list.dart';
 
 class ToDoCompleted extends StatefulWidget {
   const ToDoCompleted({super.key});

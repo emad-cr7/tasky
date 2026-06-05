@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../core/servies/preferences_manager.dart';
-import '../core/widgets/custom_svg_picture.dart';
-import '../core/widgets/custom_text_from_feild.dart';
-import 'main_screen.dart';
+import '../../core/servies/preferences_manager.dart';
+import '../../core/widgets/custom_svg_picture.dart';
+import '../../core/widgets/custom_text_from_feild.dart';
+import '../navigation/main_screen.dart';
 
-class WalcomeScreen extends StatelessWidget {
-  WalcomeScreen({super.key});
+class WelcomeScreen extends StatelessWidget {
+  WelcomeScreen({super.key});
 
   final TextEditingController controller = TextEditingController();
 

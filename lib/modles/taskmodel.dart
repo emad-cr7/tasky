@@ -35,6 +35,10 @@ class TaskModel {
 
   @override
   String toString() {
-    return 'TaskModel{id: $id, taskName: $taskName, description: $description, isHighPriority: $isHighPriority, isDone: $isDone}';
+    return 'TaskModel{id: $id,'
+        ' taskName: $taskName,'
+        ' description: $description,'
+        ' isHighPriority: $isHighPriority,'
+        ' isDone: $isDone}';
   }
 }

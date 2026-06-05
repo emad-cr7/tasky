@@ -5,10 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tasky/core/servies/preferences_manager.dart';
 import 'package:tasky/main.dart';
-import 'package:tasky/screens/user_detalis.dart';
-import '../core/theme/theme_controller.dart';
-import '../core/widgets/custom_svg_picture.dart';
-import 'Walcome_Screen.dart';
+import 'package:tasky/features/profile/user_detalis.dart';
+import '../../core/theme/theme_controller.dart';
+import '../../core/widgets/custom_svg_picture.dart';
+import '../welcome/Welcome_Screen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -325,7 +325,7 @@ void _showAlertDialog(context) {
                 context,
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return WalcomeScreen();
+                    return WelcomeScreen();
                   },
                 ),
                     (Route<dynamic> route) => false,

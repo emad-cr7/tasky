@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
-import 'package:tasky/screens/Walcome_Screen.dart';
-import 'package:tasky/screens/main_screen.dart';
+import 'package:tasky/features/welcome/Welcome_Screen.dart';
+import 'package:tasky/features/navigation/main_screen.dart';
 import 'core/servies/preferences_manager.dart';
 import 'core/theme/theme_controller.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: themeMode,
-          home: username == null ? WalcomeScreen() : MainScreen(),
+          home: username == null ? WelcomeScreen() : MainScreen(),
         );
       },
     );

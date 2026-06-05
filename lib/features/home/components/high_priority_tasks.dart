@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../core/theme/theme_controller.dart';
-import '../core/widgets/custom_check_box.dart';
-import '../modles/taskmodel.dart';
-import '../screens/high_priorty_screen.dart';
+import '../../../core/theme/theme_controller.dart';
+import '../../../core/widgets/custom_check_box.dart';
+import '../../../modles/taskmodel.dart';
+import '../../tasks/high_priorty_screen.dart';
 
 class HighPriorityTasks extends StatelessWidget {
   const HighPriorityTasks({

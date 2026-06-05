@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../core/servies/preferences_manager.dart';
-import '../core/widgets/custom_text_from_feild.dart';
+import '../../core/servies/preferences_manager.dart';
+import '../../core/widgets/custom_text_from_feild.dart';
 
 class UserDetalis extends StatefulWidget {
   UserDetalis({super.key, required this.user, required this.motivation});

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../core/theme/theme_controller.dart';
+import '../../../core/theme/theme_controller.dart';
 
 class AchievedTasks extends StatelessWidget {
   AchievedTasks({

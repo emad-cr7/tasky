@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:tasky/widgets/task_item_widget.dart';
-import '../core/widgets/custom_check_box.dart';
-import '../modles/taskmodel.dart';
+import 'package:tasky/core/components/task_item_widget.dart';
+import '../widgets/custom_check_box.dart';
+import '../../modles/taskmodel.dart';
 
 class Silver_task_list extends StatelessWidget {
   Silver_task_list({

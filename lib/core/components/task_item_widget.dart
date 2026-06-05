@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/widgets/custom_text_from_feild.dart';
 import 'package:tasky/modles/taskmodel.dart';
-import '../core/enums/task_item_action.dart';
-import '../core/servies/preferences_manager.dart';
-import '../core/widgets/custom_check_box.dart';
+import '../enums/task_item_action.dart';
+import '../servies/preferences_manager.dart';
+import '../widgets/custom_check_box.dart';
 
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({
@@ -87,9 +87,7 @@ class TaskItemWidget extends StatelessWidget {
             }).toList(),
 
             onSelected: (value) async {
-
               switch (value) {
-
                 case TaskItemAction.markAsDone:
                   onChanged(!model.isDone);
 
@@ -100,7 +98,7 @@ class TaskItemWidget extends StatelessWidget {
                   }
 
                 case TaskItemAction.delete:
-                  _showAlertDialog(context);
+                  await _showAlertDialog(context);
               }
             },
           ),
@@ -133,7 +131,6 @@ class TaskItemWidget extends StatelessWidget {
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),
               child: Text("Delete"),
-
             ),
           ],
         );
@@ -141,14 +138,7 @@ class TaskItemWidget extends StatelessWidget {
     );
   }
 
-
-
-
-
-
   Future<bool?> _showButtonSheet(BuildContext context, TaskModel model) {
-
-
     TextEditingController taskNameController = TextEditingController(
       text: model.taskName,
     );
@@ -157,9 +147,7 @@ class TaskItemWidget extends StatelessWidget {
       text: model.description,
     );
 
-
     GlobalKey<FormState> _key = GlobalKey<FormState>();
-
 
     bool isHighPriority = model.isHighPriority;
 
