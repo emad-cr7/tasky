@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import '../../core/widgets/custom_text_from_feild.dart';
@@ -11,7 +12,6 @@ class WelcomeScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,10 +87,7 @@ class WelcomeScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(fixedSize: Size(340, 40)),
                       onPressed: () async {
                         if (_key.currentState?.validate() ?? false) {
-                          await PreferencesManager().setString(
-                            'username',
-                            controller.text,
-                          );
+                          await PreferencesManager().setString(StorageKey.username, controller.text);
 
                           Navigator.pushReplacement(
                             context,
