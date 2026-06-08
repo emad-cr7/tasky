@@ -33,8 +33,8 @@ class _ProfileState extends State<Profile> {
   void _loadData() async {
     setState(() {
       username = PreferencesManager().getString(StorageKey.username);
-      motivation = PreferencesManager().getString("motivation");
-      userImage = PreferencesManager().getString("user_image");
+      motivation = PreferencesManager().getString(StorageKey.motivation);
+      userImage = PreferencesManager().getString(StorageKey.user_image);
       isLoading = false;
     });
   }
@@ -240,7 +240,7 @@ class _ProfileState extends State<Profile> {
   void _saveImage(XFile file) async {
     final appDir = await getApplicationDocumentsDirectory();
     final newFile = await File(file.path).copy('${appDir.path}/${file.name}');
-    await PreferencesManager().setString("user_image", newFile.path);
+    await PreferencesManager().setString(StorageKey.user_image, newFile.path);
   }
 }
 
@@ -319,9 +319,9 @@ void _showAlertDialog(context) {
           TextButton(
             onPressed: () {
               PreferencesManager().remove(StorageKey.username);
-              PreferencesManager().remove("motivation");
-              PreferencesManager().remove("tasks");
-              PreferencesManager().remove("user_image");
+              PreferencesManager().remove(StorageKey.motivation);
+              PreferencesManager().remove(StorageKey.tasks);
+              PreferencesManager().remove(StorageKey.user_image);
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(

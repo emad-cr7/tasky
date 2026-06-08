@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../modles/taskmodel.dart';
 import '../../core/components/sillver_task_list.dart';
@@ -23,7 +24,7 @@ class _ToDoCompletedState extends State<ToDoCompleted> {
   }
 
   void _loadTask() async {
-    final finalTask =  PreferencesManager().getString("tasks");
+    final finalTask =  PreferencesManager().getString(StorageKey.tasks);
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
       completedTasks = taskDecode
@@ -42,7 +43,7 @@ class _ToDoCompletedState extends State<ToDoCompleted> {
     List<TaskModel> tasks = [];
     if (id == null) return;
 
-    final finalTask = PreferencesManager().getString("tasks");
+    final finalTask = PreferencesManager().getString(StorageKey.tasks);
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
       tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
@@ -51,7 +52,7 @@ class _ToDoCompletedState extends State<ToDoCompleted> {
         completedTasks.removeWhere((task) => task.id == id);
       });
       final updatedTask = tasks.map((element) => element.toJeson()).toList();
-      PreferencesManager().setString('tasks', jsonEncode(updatedTask));
+      PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
     }
   }
 
@@ -81,9 +82,7 @@ class _ToDoCompletedState extends State<ToDoCompleted> {
                           setState(() {
                             completedTasks[index!].isDone = value ?? false;
                           });
-                          final allDate = PreferencesManager().getString(
-                            'tasks',
-                          );
+                          final allDate = PreferencesManager().getString(StorageKey.tasks,);
 
                           if (allDate != null) {
                             List<TaskModel> allDataList =
@@ -97,7 +96,7 @@ class _ToDoCompletedState extends State<ToDoCompleted> {
                             );
                             allDataList[newIndex] = completedTasks[index!];
                             await PreferencesManager().setString(
-                              "tasks",
+                              StorageKey.tasks,
                               jsonEncode(
                                 allDataList.map((e) => e.toJeson()).toList(),
                               ),

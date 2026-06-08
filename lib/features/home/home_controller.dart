@@ -28,12 +28,12 @@ class HomeController with ChangeNotifier {
 
   void loadUserName() async {
     username = PreferencesManager().getString(StorageKey.username);
-    userImage = PreferencesManager().getString("user_image");
+    userImage = PreferencesManager().getString(StorageKey.user_image);
     notifyListeners();
   }
 
   void loadTask() async {
-    final finalTask = PreferencesManager().getString("tasks");
+    final finalTask = PreferencesManager().getString(StorageKey.tasks);
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
       tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
@@ -53,7 +53,7 @@ class HomeController with ChangeNotifier {
     tasks[index!].isDone = value ?? false;
     calculatePecent();
     final UpdatedTask = tasks.map((element) => element.toJeson()).toList();
-    PreferencesManager().setString("tasks", jsonEncode(UpdatedTask));
+    PreferencesManager().setString(StorageKey.tasks, jsonEncode(UpdatedTask));
     notifyListeners();
   }
 
@@ -62,7 +62,7 @@ class HomeController with ChangeNotifier {
     tasks.removeWhere((task) => task.id == id);
     calculatePecent();
     final UpdatedTask = tasks.map((element) => element.toJeson()).toList();
-    PreferencesManager().setString("tasks", jsonEncode(UpdatedTask));
+    PreferencesManager().setString(StorageKey.tasks, jsonEncode(UpdatedTask));
     notifyListeners();
   }
 }

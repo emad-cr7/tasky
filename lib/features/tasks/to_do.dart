@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../modles/taskmodel.dart';
 import '../../core/components/sillver_task_list.dart';
@@ -23,7 +24,7 @@ class _ToDoState extends State<ToDo> {
   }
 
   void _loadTask() async {
-    final finalTask =  PreferencesManager().getString("tasks");
+    final finalTask = PreferencesManager().getString(StorageKey.tasks);
 
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
@@ -42,7 +43,7 @@ class _ToDoState extends State<ToDo> {
   _deletTask(int? id) async {
     List<TaskModel> tasks = [];
     if (id == null) return;
-    final finalTask = PreferencesManager().getString("tasks");
+    final finalTask = PreferencesManager().getString(StorageKey.tasks);
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
       tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
@@ -51,7 +52,7 @@ class _ToDoState extends State<ToDo> {
         todoTasks.removeWhere((task) => task.id == id);
       });
       final updatedTask = tasks.map((element) => element.toJeson()).toList();
-      PreferencesManager().setString('tasks', jsonEncode(updatedTask));
+      PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
     }
   }
 
@@ -68,49 +69,51 @@ class _ToDoState extends State<ToDo> {
           ),
         ),
         Expanded(
-
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: isLoading
                 ? Center(child: CircularProgressIndicator())
                 : CustomScrollView(
-                            slivers: [
-                 Silver_task_list(
-                  emptyTask: "No To Do Tasks",
-                  tasks: todoTasks,
-                  onTap: (value, index) async {
-                    setState(() {
-                      todoTasks[index!].isDone = value ?? false;
-                    });
-                    final allDate = PreferencesManager().getString('tasks');
-                    if (allDate != null) {
-                      List<TaskModel> allDataList =
-                      (jsonDecode(allDate) as List)
-                          .map((element) => TaskModel.fromJSON(element))
-                          .toList();
-                      final newIndex = allDataList.indexWhere(
-                            (e) => e.id == todoTasks[index!].id,
-                      );
-                      allDataList[newIndex] = todoTasks[index!];
-                      await PreferencesManager().setString(
-                        "tasks",
-                        jsonEncode(
-                          allDataList.map((e) => e.toJeson()).toList(),
-                        ),
-                      );
-                      _loadTask();
-                    }
-                  },
-                  onDelet: (int? p1) {
-                    _deletTask(p1);
-                  },
-                   onEdit: () {
-                     _loadTask();
-                   },
-                ),
-                            ],
-
-                ),
+                    slivers: [
+                      Silver_task_list(
+                        emptyTask: "No To Do Tasks",
+                        tasks: todoTasks,
+                        onTap: (value, index) async {
+                          setState(() {
+                            todoTasks[index!].isDone = value ?? false;
+                          });
+                          final allDate = PreferencesManager().getString(
+                            StorageKey.tasks,
+                          );
+                          if (allDate != null) {
+                            List<TaskModel> allDataList =
+                                (jsonDecode(allDate) as List)
+                                    .map(
+                                      (element) => TaskModel.fromJSON(element),
+                                    )
+                                    .toList();
+                            final newIndex = allDataList.indexWhere(
+                              (e) => e.id == todoTasks[index!].id,
+                            );
+                            allDataList[newIndex] = todoTasks[index!];
+                            await PreferencesManager().setString(
+                              StorageKey.tasks,
+                              jsonEncode(
+                                allDataList.map((e) => e.toJeson()).toList(),
+                              ),
+                            );
+                            _loadTask();
+                          }
+                        },
+                        onDelet: (int? p1) {
+                          _deletTask(p1);
+                        },
+                        onEdit: () {
+                          _loadTask();
+                        },
+                      ),
+                    ],
+                  ),
           ),
         ),
       ],

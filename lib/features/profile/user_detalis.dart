@@ -77,8 +77,7 @@ class _UserDetalisState extends State<UserDetalis> {
                 onPressed: () async {
                   if (_key.currentState!.validate()) {
                     PreferencesManager().setString(StorageKey.username, userController.text,);
-                    PreferencesManager().setString(
-                      'motivation',
+                    PreferencesManager().setString(StorageKey.motivation,
                       motivationController.text,
                     );
 
