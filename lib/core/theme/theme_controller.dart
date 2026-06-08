@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../constants/storage_key.dart';
 import '../servies/preferences_manager.dart';
 
 class ThemeController {
   static final ValueNotifier<ThemeMode> themNotifier = ValueNotifier(ThemeMode.dark,);
 
   init() {
-    bool? result = PreferencesManager().getBool("theme") ?? true;
+    bool? result = PreferencesManager().getBool(StorageKey.theme) ?? true;
 
     themNotifier.value = result == true ? ThemeMode.dark : ThemeMode.light;
   }
@@ -15,11 +16,11 @@ class ThemeController {
     if(themNotifier.value == ThemeMode.dark){
 
       themNotifier.value =ThemeMode.light;
-      await  PreferencesManager().setBool("theme", false);
+      await  PreferencesManager().setBool(StorageKey.theme, false);
 
     }else{
       themNotifier.value =ThemeMode.dark;
-      await PreferencesManager().setBool("theme", true);
+      await PreferencesManager().setBool(StorageKey.theme, true);
 
     }
   }

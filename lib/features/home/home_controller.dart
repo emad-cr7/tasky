@@ -28,7 +28,7 @@ class HomeController with ChangeNotifier {
 
   void loadUserName() async {
     username = PreferencesManager().getString(StorageKey.username);
-    userImage = PreferencesManager().getString(StorageKey.user_image);
+    userImage = PreferencesManager().getString(StorageKey.userImage);
     notifyListeners();
   }
 
