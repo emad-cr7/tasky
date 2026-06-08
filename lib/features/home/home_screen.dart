@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tasky/modles/taskmodel.dart';
 import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
@@ -11,83 +12,22 @@ import 'components/high_priority_tasks.dart';
 import '../../core/components/sillver_task_list.dart';
 import '../../core/components/task_list.dart';
 import '../add_task/add_task.dart';
+import 'home_controller.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  String? username;
-  String? userImage;
-  List<TaskModel> tasks = [];
-  bool isLoading = true;
-  int totalTask = 0;
-  int doneTask = 0;
-  double percent = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUserName();
-    _loadTask();
-  }
-
-  void _loadUserName() async {
-    setState(() {
-      username = PreferencesManager().getString(StorageKey.username);
-      userImage = PreferencesManager().getString("user_image");
-    });
-  }
-
-  void _loadTask() async {
-    final finalTask = PreferencesManager().getString("tasks");
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-      tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
-      _calculatePecent();
-    }
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  _donTask(bool? value, int? index) async {
-    setState(() {
-      tasks[index!].isDone = value ?? false;
-      _calculatePecent();
-    });
-    final UpdatedTask = tasks.map((element) => element.toJeson()).toList();
-    PreferencesManager().setString("tasks", jsonEncode(UpdatedTask));
-  }
-
-  _calculatePecent() {
-    totalTask = tasks.length;
-    doneTask = tasks.where((e) => e.isDone).length;
-    percent = totalTask == 0 ? 0 : doneTask / totalTask;
-  }
-
-  _deletTask(int? id) async {
-    if (id == null) return;
-    setState(() {
-      tasks.removeWhere((task) => task.id == id);
-
-      _calculatePecent();
-    });
-    final UpdatedTask = tasks.map((element) => element.toJeson()).toList();
-    PreferencesManager().setString("tasks", jsonEncode(UpdatedTask));
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: isLoading
-            ? Center(child: CircularProgressIndicator())
-            : CustomScrollView(
+    return ChangeNotifierProvider<HomeController>(
+      create: (context) => HomeController(),
+      child: Consumer<HomeController>(
+        builder: (BuildContext context, HomeController value, Widget? child) {
+          final controller = context.read<HomeController>();
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(16),
+              child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
                     child: Column(
@@ -99,9 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             Padding(
                               padding: EdgeInsets.only(right: 8),
                               child: CircleAvatar(
-                                backgroundImage: userImage == null
+                                backgroundImage: value.userImage == null
                                     ? AssetImage("assets/images/cr.jpg")
-                                    : FileImage(File(userImage!)),
+                                    : FileImage(File(value.userImage!)),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
@@ -109,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Good Evening ,$username ",
+                                  "Good Evening ,${value.username} ",
                                   style: Theme.of(
                                     context,
                                   ).textTheme.titleMedium,
@@ -142,18 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: 16),
                         AchievedTasks(
-                          totalTask: totalTask,
-                          doneTask: doneTask,
-                          percent: percent,
+                          totalTask: value.totalTask,
+                          doneTask: value.doneTask,
+                          percent: value.percent,
                         ),
                         SizedBox(height: 8),
                         HighPriorityTasks(
-                          tasks: tasks,
+                          tasks: value.tasks,
                           onTap: (bool? value, int? index) {
-                            _donTask(value, index);
+                            controller.donTask(value, index);
                           },
                           refresh: () {
-                            _loadTask();
+                            controller.loadTask();
                           },
                         ),
                         Padding(
@@ -169,42 +109,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Silver_task_list(
                     emptyTask: "No Tasks",
-                    tasks: tasks,
+                    tasks: value.tasks,
                     onTap: (bool? value, int? index) {
-                      _donTask(value, index);
+                      controller.donTask(value, index);
                     },
                     onDelet: (int? id) {
-                      _deletTask(id);
+                      controller.deletTask(id);
                     },
                     onEdit: () {
-                      _loadTask();
+                      controller.loadTask();
                     },
                   ),
                 ],
               ),
-      ),
-      floatingActionButton: SizedBox(
-        height: 44,
-        child: FloatingActionButton.extended(
-          onPressed: () async {
-            final bool? result = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return Add_task();
+            ),
+
+            floatingActionButton: SizedBox(
+              height: 44,
+              child: FloatingActionButton.extended(
+                onPressed: () async {
+                  final bool? result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Add_task();
+                      },
+                    ),
+                  );
+                  if (result != null && result) {
+                    controller.loadTask();
+                  }
                 },
+                label: Text("Add New Task"),
+                icon: Icon(Icons.add),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
               ),
-            );
-            if (result != null && result) {
-              _loadTask();
-            }
-          },
-          label: Text("Add New Task"),
-          icon: Icon(Icons.add),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
