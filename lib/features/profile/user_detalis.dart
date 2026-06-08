@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../core/widgets/custom_text_from_feild.dart';
 
@@ -75,10 +76,7 @@ class _UserDetalisState extends State<UserDetalis> {
               ElevatedButton(
                 onPressed: () async {
                   if (_key.currentState!.validate()) {
-                    PreferencesManager().setString(
-                      'username',
-                      userController.text,
-                    );
+                    PreferencesManager().setString(StorageKey.username, userController.text,);
                     PreferencesManager().setString(
                       'motivation',
                       motivationController.text,

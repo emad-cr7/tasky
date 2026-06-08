@@ -12,6 +12,7 @@ class WelcomeScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,9 @@ class WelcomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomSvgPicture.withColor(path: "assets/images/Vector.svg",),
+                        CustomSvgPicture.withColor(
+                          path: "assets/images/Vector.svg",
+                        ),
                         SizedBox(width: 16),
                         Text(
                           "Tasky",
@@ -44,8 +47,9 @@ class WelcomeScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                         SizedBox(width: 8),
-                        CustomSvgPicture.withColor(path: "assets/images/waving_hand.svg",),
-
+                        CustomSvgPicture.withColor(
+                          path: "assets/images/waving_hand.svg",
+                        ),
                       ],
                     ),
                     SizedBox(height: 8),
@@ -87,7 +91,10 @@ class WelcomeScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(fixedSize: Size(340, 40)),
                       onPressed: () async {
                         if (_key.currentState?.validate() ?? false) {
-                          await PreferencesManager().setString(StorageKey.username, controller.text);
+                          await PreferencesManager().setString(
+                            StorageKey.username,
+                            controller.text,
+                          );
 
                           Navigator.pushReplacement(
                             context,

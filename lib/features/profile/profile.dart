@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:tasky/core/servies/preferences_manager.dart';
 import 'package:tasky/main.dart';
 import 'package:tasky/features/profile/user_detalis.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/theme/theme_controller.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import '../welcome/Welcome_Screen.dart';
@@ -31,7 +32,7 @@ class _ProfileState extends State<Profile> {
 
   void _loadData() async {
     setState(() {
-      username = PreferencesManager().getString("username");
+      username = PreferencesManager().getString(StorageKey.username);
       motivation = PreferencesManager().getString("motivation");
       userImage = PreferencesManager().getString("user_image");
       isLoading = false;
@@ -243,8 +244,7 @@ class _ProfileState extends State<Profile> {
   }
 }
 
-void showImageSourcDialog(
-    BuildContext context, Function(XFile) selectedFile) {
+void showImageSourcDialog(BuildContext context, Function(XFile) selectedFile) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -297,6 +297,7 @@ void showImageSourcDialog(
     },
   );
 }
+
 void _showAlertDialog(context) {
   showDialog(
     context: context,
@@ -317,7 +318,7 @@ void _showAlertDialog(context) {
 
           TextButton(
             onPressed: () {
-              PreferencesManager().remove("username");
+              PreferencesManager().remove(StorageKey.username);
               PreferencesManager().remove("motivation");
               PreferencesManager().remove("tasks");
               PreferencesManager().remove("user_image");
@@ -328,12 +329,11 @@ void _showAlertDialog(context) {
                     return WelcomeScreen();
                   },
                 ),
-                    (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
               );
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             child: Text("Log out"),
-
           ),
         ],
       );

@@ -3,6 +3,7 @@ import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
 import 'package:tasky/features/welcome/Welcome_Screen.dart';
 import 'package:tasky/features/navigation/main_screen.dart';
+import 'core/constants/storage_key.dart';
 import 'core/servies/preferences_manager.dart';
 import 'core/theme/theme_controller.dart';
 
@@ -11,7 +12,7 @@ void main() async {
   await PreferencesManager().init();
 
   ThemeController().init();
-  String? username = PreferencesManager().getString('username');
+  String? username = PreferencesManager().getString(StorageKey.username);
 
   runApp(MyApp(username: username));
 }

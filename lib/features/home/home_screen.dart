@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:tasky/modles/taskmodel.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import 'components/achieved_tasks.dart';
@@ -36,11 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadUserName() async {
     setState(() {
-      username = PreferencesManager().getString('username');
+      username = PreferencesManager().getString(StorageKey.username);
       userImage = PreferencesManager().getString("user_image");
     });
   }
-
 
   void _loadTask() async {
     final finalTask = PreferencesManager().getString("tasks");
@@ -98,10 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(right: 8),
-                              child:
-                              CircleAvatar(
-                                backgroundImage:
-                                userImage == null
+                              child: CircleAvatar(
+                                backgroundImage: userImage == null
                                     ? AssetImage("assets/images/cr.jpg")
                                     : FileImage(File(userImage!)),
                                 backgroundColor: Colors.transparent,
@@ -174,11 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     tasks: tasks,
                     onTap: (bool? value, int? index) {
                       _donTask(value, index);
-                    }, onDelet: (int? id) {
-                    _deletTask(id) ;
-                  }, onEdit: () {
+                    },
+                    onDelet: (int? id) {
+                      _deletTask(id);
+                    },
+                    onEdit: () {
                       _loadTask();
-                  },
+                    },
                   ),
                 ],
               ),
@@ -188,7 +188,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: FloatingActionButton.extended(
           onPressed: () async {
             final bool? result = await Navigator.push(
-              context, MaterialPageRoute(builder: (context) {
+              context,
+              MaterialPageRoute(
+                builder: (context) {
                   return Add_task();
                 },
               ),
