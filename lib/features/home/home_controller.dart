@@ -15,9 +15,7 @@ class HomeController with ChangeNotifier {
   int doneTask = 0;
   double percent = 0;
 
-  HomeController(){
-    init();
-  }
+
 
 
 

@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeController>(
-      create: (context) => HomeController(),
+      create: (context) => HomeController()..init(),
       child: Consumer<HomeController>(
         builder: (BuildContext context, HomeController value, Widget? child) {
           final controller = context.read<HomeController>();
