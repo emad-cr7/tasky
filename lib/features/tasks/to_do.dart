@@ -8,52 +8,47 @@ class ToDo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TasksController>(
-      create: (_) => TasksController()..init(),
-      builder: (context, _) {
-        final controller = context.read<TasksController>();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                "To Do Tasks",
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: controller.isLoading
-                    ? Center(child: CircularProgressIndicator())
-                    : Consumer<TasksController>(
-                  builder:
-                      (
-                      BuildContext context,
-                      TasksController controller,
-                      Widget? child,
-                      ) {
-                    return TaskList(
-                      emptyTask: "No To Do Tasks",
-                      tasks: controller.todoTasks,
-                      onTap: (value, index) async {
-                        controller.donnTask(value, index);
-                      },
-                      onDelete: (int? id) {
-                        controller.deletTask(id);
-                      },
-                      onEdit: () {
-                        controller.init();
-                      },
-                    );
+    final controller = context.read<TasksController>();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            "To Do Tasks",
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: controller.isLoading
+                ? Center(child: CircularProgressIndicator())
+                : Consumer<TasksController>(
+              builder:
+                  (
+                  BuildContext context,
+                  TasksController controller,
+                  Widget? child,
+                  ) {
+                return TaskList(
+                  emptyTask: "No To Do Tasks",
+                  tasks: controller.todoTasks,
+                  onTap: (value, index) async {
+                    controller.doneToDoTask(value, index);
                   },
-                ),
-              ),
+                  onDelete: (int? id) {
+                    controller.deletTask(id);
+                  },
+                  onEdit: () {
+                    controller.init();
+                  },
+                );
+              },
             ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }

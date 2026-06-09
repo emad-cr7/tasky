@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
 import 'package:tasky/features/home/home_controller.dart';
 
+import '../../tasks/cotrollers/tasks_controller.dart';
+
 
 class Silver_task_list extends StatelessWidget {
   Silver_task_list({
@@ -17,9 +19,9 @@ class Silver_task_list extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
+    return Consumer<TasksController>(
       builder:
-          (BuildContext context, HomeController controller, Widget? child) {
+          (BuildContext context, TasksController controller, Widget? child) {
         final tasksList = controller.tasks;
         return tasksList.isEmpty
             ? SliverFillRemaining(
@@ -39,7 +41,7 @@ class Silver_task_list extends StatelessWidget {
               return TaskItemWidget(
                 model: tasksList[index],
                 onChanged: (bool? value) {
-                  controller.donTask(value, index);
+                  controller.doneTasks(value, index);
                 },
                 onDelete: (int id) {
                   controller.deletTask(id);

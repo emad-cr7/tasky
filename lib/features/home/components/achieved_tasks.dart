@@ -6,14 +6,15 @@ import 'package:provider/provider.dart';
 import 'package:tasky/features/home/home_controller.dart';
 
 import '../../../core/theme/theme_controller.dart';
+import '../../tasks/cotrollers/tasks_controller.dart';
 
 class AchievedTasks extends StatelessWidget {
   AchievedTasks({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
-      builder: (BuildContext context, HomeController controller, Widget? child) {
+    return Consumer<TasksController>(
+      builder: (BuildContext context, TasksController controller, Widget? child) {
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(

@@ -23,7 +23,7 @@ class TaskModel {
     );
   }
 
-  Map<String, dynamic> toJeson() {
+  Map<String, dynamic> toJson() {
     return {
       "id": id,
       "taskName": taskName,

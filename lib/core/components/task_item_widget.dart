@@ -253,7 +253,7 @@ class TaskItemWidget extends StatelessWidget {
 
                           final int index = listTasks.indexOf(item);
 
-                          listTasks[index] = newModel.toJeson();
+                          listTasks[index] = newModel.toJson();
 
                           final taskEncode = jsonEncode(listTasks);
 

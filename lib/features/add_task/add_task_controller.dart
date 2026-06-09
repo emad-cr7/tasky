@@ -28,7 +28,7 @@ class AddTaskController with ChangeNotifier {
         isHighPriority: isHighPriority,
       );
 
-      listTasks.add(model.toJeson());
+      listTasks.add(model.toJson());
 
       final taskEncode = jsonEncode(listTasks);
       await PreferencesManager().setString(StorageKey.tasks, taskEncode);
