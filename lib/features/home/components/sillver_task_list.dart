@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
-import 'package:tasky/features/home/home_controller.dart';
 
 import '../../tasks/cotrollers/tasks_controller.dart';
 
@@ -41,7 +39,7 @@ class Silver_task_list extends StatelessWidget {
               return TaskItemWidget(
                 model: tasksList[index],
                 onChanged: (bool? value) {
-                  controller.doneTasks(value, index);
+                  controller.doneTasks(value,tasksList[index].id);
                 },
                 onDelete: (int id) {
                   controller.deletTask(id);

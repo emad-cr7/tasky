@@ -35,7 +35,7 @@ class ToDo extends StatelessWidget {
                   emptyTask: "No To Do Tasks",
                   tasks: controller.todoTasks,
                   onTap: (value, index) async {
-                    controller.doneToDoTask(value, index);
+                    controller.doneTasks(value, controller.todoTasks[index!].id,);
                   },
                   onDelete: (int? id) {
                     controller.deletTask(id);

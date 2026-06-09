@@ -10,7 +10,7 @@ class ToDoCompleted extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = context.read<TasksController>();
 
-    return  Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -26,27 +26,30 @@ class ToDoCompleted extends StatelessWidget {
             child: controller.isLoading
                 ? Center(child: CircularProgressIndicator())
                 : Consumer<TasksController>(
-              builder:
-                  (
-                  BuildContext context,
-                  TasksController controller,
-                  Widget? child,
-                  ) {
-                return TaskList(
-                  emptyTask: "No Completed Tasks",
-                  tasks: controller.completed,
-                  onTap: (value, index) async {
-                    controller.doneCompletedTask(value, index);
-                  },
-                  onDelete: (int? id) {
-                    controller.deletTask(id);
-                  },
-                  onEdit: () {
-                    controller.init();
-                  },
-                );
-              },
-            ),
+                    builder:
+                        (
+                          BuildContext context,
+                          TasksController controller,
+                          Widget? child,
+                        ) {
+                          return TaskList(
+                            emptyTask: "No Completed Tasks",
+                            tasks: controller.completed,
+                            onTap: (value, index) async {
+                              controller.doneTasks(
+                                value,
+                                controller.completed[index!].id,
+                              );
+                            },
+                            onDelete: (int? id) {
+                              controller.deletTask(id);
+                            },
+                            onEdit: () {
+                              controller.init();
+                            },
+                          );
+                        },
+                  ),
           ),
         ),
       ],

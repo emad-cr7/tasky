@@ -22,7 +22,10 @@ class HighPriortyScreen extends StatelessWidget {
               emptyTask: "No Tasks",
               tasks: controller.highPriorityTasks,
               onTap: (value, index) async {
-                controller.doneHighPriorityTasksTask(value, index);
+                controller.doneTasks(
+                  value,
+                  controller.highPriorityTasks[index!].id,
+                );
               },
               onDelete: (int? id) {
                 controller.deletTask(id);
