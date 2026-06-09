@@ -46,7 +46,7 @@ class Add_task extends StatelessWidget {
                               controller: controller.taskDescriptionController,
                               maxLines: 5,
                               hint:
-                                  "Finish onboarding UI and hand off to devs by Thursday.",
+                              "Finish onboarding UI and hand off to devs by Thursday.",
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,18 +60,18 @@ class Add_task extends StatelessWidget {
                                 Consumer<AddTaskController>(
                                   builder:
                                       (
-                                        BuildContext context,
-                                        AddTaskController value,
-                                        Widget? child,
+                                      BuildContext context,
+                                      AddTaskController value,
+                                      Widget? child,
                                       ) {
-                                        return Switch(
+                                    return Switch(
 
-                                          value: value.isHighPriority,
-                                          onChanged: (bool value) {
-                                            controller.toggle(value);
-                                          },
-                                        );
+                                      value: value.isHighPriority,
+                                      onChanged: (bool value) {
+                                        controller.toggle(value);
                                       },
+                                    );
+                                  },
                                 ),
                               ],
                             ),

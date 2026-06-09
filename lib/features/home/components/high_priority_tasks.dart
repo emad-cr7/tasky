@@ -17,7 +17,7 @@ class HighPriorityTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeController>(
       builder: (BuildContext context, HomeController controller, Widget? child) {
-       final tasksList = controller.tasks ;
+        final tasksList = controller.tasks ;
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(

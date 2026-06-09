@@ -193,7 +193,7 @@ class TaskItemWidget extends StatelessWidget {
                               controller: taskDescriptionController,
                               maxLines: 5,
                               hint:
-                                  "Finish onboarding UI and hand off to devs by Thursday.",
+                              "Finish onboarding UI and hand off to devs by Thursday.",
                             ),
                             SizedBox(height: 8),
 
@@ -248,7 +248,7 @@ class TaskItemWidget extends StatelessWidget {
                           );
 
                           final item = listTasks.firstWhere(
-                            (e) => e['id'] == model.id,
+                                (e) => e['id'] == model.id,
                           );
 
                           final int index = listTasks.indexOf(item);

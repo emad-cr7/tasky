@@ -70,7 +70,7 @@ class TasksController with ChangeNotifier {
     highPriorityTasks[index].isDone = value ?? false;
 
     final newIndex = tasks.indexWhere(
-      (e) => e.id == highPriorityTasks[index].id,
+          (e) => e.id == highPriorityTasks[index].id,
     );
     tasks[newIndex] = highPriorityTasks[index];
     await PreferencesManager().setString(

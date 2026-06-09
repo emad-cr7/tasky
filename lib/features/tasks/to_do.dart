@@ -28,27 +28,27 @@ class ToDo extends StatelessWidget {
                 child: controller.isLoading
                     ? Center(child: CircularProgressIndicator())
                     : Consumer<TasksController>(
-                        builder:
-                            (
-                              BuildContext context,
-                              TasksController controller,
-                              Widget? child,
-                            ) {
-                              return TaskList(
-                                emptyTask: "No To Do Tasks",
-                                tasks: controller.todoTasks,
-                                onTap: (value, index) async {
-                                  controller.donnTask(value, index);
-                                },
-                                onDelete: (int? id) {
-                                  controller.deletTask(id);
-                                },
-                                onEdit: () {
-                                  controller.init();
-                                },
-                              );
-                            },
-                      ),
+                  builder:
+                      (
+                      BuildContext context,
+                      TasksController controller,
+                      Widget? child,
+                      ) {
+                    return TaskList(
+                      emptyTask: "No To Do Tasks",
+                      tasks: controller.todoTasks,
+                      onTap: (value, index) async {
+                        controller.donnTask(value, index);
+                      },
+                      onDelete: (int? id) {
+                        controller.deletTask(id);
+                      },
+                      onEdit: () {
+                        controller.init();
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],

@@ -1,17 +1,12 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tasky/modles/taskmodel.dart';
-import '../../core/constants/storage_key.dart';
-import '../../core/servies/preferences_manager.dart';
+
 import '../../core/widgets/custom_svg_picture.dart';
 import 'components/achieved_tasks.dart';
 import 'components/high_priority_tasks.dart';
-import '../../core/components/sillver_task_list.dart';
-import '../../core/components/task_list.dart';
 import '../add_task/add_task.dart';
+import 'components/sillver_task_list.dart';
 import 'home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -47,7 +42,9 @@ class HomeScreen extends StatelessWidget {
                                 ) {
                                   return CircleAvatar(
                                     backgroundImage: userImage == null
-                                        ? AssetImage("assets/images/cr.jpg")
+                                        ? AssetImage(
+                                            "assets/images/profile.png",
+                                          )
                                         : FileImage(File(userImage!)),
                                     backgroundColor: Colors.transparent,
                                   );

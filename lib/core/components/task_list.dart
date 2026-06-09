@@ -27,29 +27,29 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return tasks.isEmpty
         ? Center(
-            child: Text(
-              emptyTask ?? "",
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-          )
+      child: Text(
+        emptyTask ?? "",
+        style: Theme.of(context).textTheme.displaySmall,
+      ),
+    )
         : ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: tasks.length,
-            padding: EdgeInsets.only(bottom: 60),
-            itemBuilder: (BuildContext context, int index) {
-              return TaskItemWidget(
-                model: tasks[index],
-                onChanged: (bool? value) {
-                  onTap(value, index);
-                }, onDelete: (int id) {
-                  onDelete(id);
-              }, onEdit: onEdit,
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(height: 8);
-            },
-          );
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: tasks.length,
+      padding: EdgeInsets.only(bottom: 60),
+      itemBuilder: (BuildContext context, int index) {
+        return TaskItemWidget(
+          model: tasks[index],
+          onChanged: (bool? value) {
+            onTap(value, index);
+          }, onDelete: (int id) {
+          onDelete(id);
+        }, onEdit: onEdit,
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(height: 8);
+      },
+    );
   }
 }
