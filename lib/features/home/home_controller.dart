@@ -15,18 +15,12 @@ class HomeController with ChangeNotifier {
   int doneTask = 0;
   double percent = 0;
 
-
-
-
-
   init() {
-    loadUserName();
+    loadUserData();
     loadTask();
   }
 
-
-
-  void loadUserName() async {
+  void loadUserData() async {
     username = PreferencesManager().getString(StorageKey.username);
     userImage = PreferencesManager().getString(StorageKey.userImage);
     notifyListeners();
@@ -42,6 +36,7 @@ class HomeController with ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
   calculatePecent() {
     totalTask = tasks.length;
     doneTask = tasks.where((e) => e.isDone).length;

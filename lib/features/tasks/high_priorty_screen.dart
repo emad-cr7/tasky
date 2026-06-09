@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../modles/taskmodel.dart';
 import '../../core/components/sillver_task_list.dart';
@@ -12,11 +11,11 @@ class HighPriortyScreen extends StatefulWidget {
   const HighPriortyScreen({super.key});
 
   @override
-  State<HighPriortyScreen> createState() => _HighPriorityScreenState();
+  State<HighPriortyScreen> createState() => _HighPriortyScreenState();
 }
 
-class _HighPriorityScreenState extends State<HighPriortyScreen> {
-  List<TaskModel> highPriorityTasks = [];
+class _HighPriortyScreenState extends State<HighPriortyScreen> {
+  List<TaskModel> highpriortyTasks = [];
 
   @override
   void initState() {
@@ -25,14 +24,14 @@ class _HighPriorityScreenState extends State<HighPriortyScreen> {
   }
 
   void _loadTask() async {
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
+    final finalTask = PreferencesManager().getString("tasks");
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
 
-      highPriorityTasks = taskDecode
+      highpriortyTasks = taskDecode
           .map((element) => TaskModel.fromJSON(element))
           .toList();
-      highPriorityTasks = highPriorityTasks
+      highpriortyTasks = highpriortyTasks
           .where((element) => element.isHighPriority == true)
           .toList()
           .reversed
@@ -42,10 +41,10 @@ class _HighPriorityScreenState extends State<HighPriortyScreen> {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
 
       setState(() {
-        highPriorityTasks = taskDecode
+        highpriortyTasks = taskDecode
             .map((element) => TaskModel.fromJSON(element))
             .toList();
-        highPriorityTasks = highPriorityTasks
+        highpriortyTasks = highpriortyTasks
             .where((element) => element.isHighPriority == true)
             .toList()
             .reversed
@@ -58,16 +57,16 @@ class _HighPriorityScreenState extends State<HighPriortyScreen> {
     List<TaskModel> tasks = [];
     if (id == null) return;
 
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
+    final finalTask = PreferencesManager().getString("tasks");
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
       tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
       tasks.removeWhere((e) => e.id == id);
       setState(() {
-        highPriorityTasks.removeWhere((task) => task.id == id);
+        highpriortyTasks.removeWhere((task) => task.id == id);
       });
       final updatedTask = tasks.map((element) => element.toJeson()).toList();
-      PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
+      PreferencesManager().setString('tasks', jsonEncode(updatedTask));
     }
   }
 
@@ -77,37 +76,35 @@ class _HighPriorityScreenState extends State<HighPriortyScreen> {
       appBar: AppBar(title: Text("High Priorty Tasks")),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: CustomScrollView(
-          slivers: [
-            Silver_task_list(
-              emptyTask: "No Tasks",
-              tasks: highPriorityTasks,
-              onTap: (value, index) async {
-                setState(() {
-                  highPriorityTasks[index!].isDone = value ?? false;
-                });
-                final allDate = PreferencesManager().getString(StorageKey.tasks);
-                if (allDate != null) {
-                  List<TaskModel> allDataList = (jsonDecode(allDate) as List)
-                      .map((element) => TaskModel.fromJSON(element))
-                      .toList();
-                  final newIndex = allDataList.indexWhere(
-                    (e) => e.id == highPriorityTasks[index!].id,
-                  );
-                  allDataList[newIndex] = highPriorityTasks[index!];
-                  await PreferencesManager().setString(StorageKey.tasks,
-                    jsonEncode(allDataList.map((e) => e.toJeson()).toList()),
-                  );
-                  _loadTask();
-                }
-              },
-              onDelet: (int? id) {
-                _deletTask(id);
-              },  onEdit: () {
+        child: TaskList(
+          emptyTask: "No Tasks",
+          tasks: highpriortyTasks,
+          onTap: (value, index) async {
+            setState(() {
+              highpriortyTasks[index!].isDone = value ?? false;
+            });
+            final allDate = PreferencesManager().getString("tasks");
+            if (allDate != null) {
+              List<TaskModel> allDataList = (jsonDecode(allDate) as List)
+                  .map((element) => TaskModel.fromJSON(element))
+                  .toList();
+              final newIndex = allDataList.indexWhere(
+                (e) => e.id == highpriortyTasks[index!].id,
+              );
+              allDataList[newIndex] = highpriortyTasks[index!];
+              await PreferencesManager().setString(
+                "tasks",
+                jsonEncode(allDataList.map((e) => e.toJeson()).toList()),
+              );
               _loadTask();
-            },
-            ),
-          ],
+            }
+          },
+          onDelete: (int? id) {
+            _deletTask(id);
+          },
+          onEdit: () {
+            _loadTask();
+          },
         ),
       ),
     );
