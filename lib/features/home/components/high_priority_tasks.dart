@@ -13,9 +13,6 @@ class HighPriorityTasks extends StatelessWidget {
   const HighPriorityTasks({
     super.key,
   });
-
-
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeController>(

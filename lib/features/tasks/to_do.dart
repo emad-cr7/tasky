@@ -1,114 +1,59 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../../core/constants/storage_key.dart';
-import '../../core/servies/preferences_manager.dart';
-import '../../modles/taskmodel.dart';
-import '../../core/components/sillver_task_list.dart';
+import 'package:provider/provider.dart';
+import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 import '../../core/components/task_list.dart';
 
-class ToDo extends StatefulWidget {
+class ToDo extends StatelessWidget {
   const ToDo({super.key});
 
   @override
-  State<ToDo> createState() => _ToDoState();
-}
-
-class _ToDoState extends State<ToDo> {
-  List<TaskModel> todoTasks = [];
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTask();
-  }
-
-  void _loadTask() async {
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
-
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-      todoTasks = taskDecode
-          .map((element) => TaskModel.fromJSON(element))
-          .toList();
-      todoTasks = todoTasks
-          .where((element) => element.isDone == false)
-          .toList();
-    }
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  _deletTask(int? id) async {
-    List<TaskModel> tasks = [];
-    if (id == null) return;
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-      tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
-      tasks.removeWhere((e) => e.id == id);
-      setState(() {
-        todoTasks.removeWhere((task) => task.id == id);
-      });
-      final updatedTask = tasks.map((element) => element.toJeson()).toList();
-      PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "To Do Tasks",
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: isLoading
-                ? Center(child: CircularProgressIndicator())
-                : TaskList(
-                    emptyTask: "No To Do Tasks",
-                    tasks: todoTasks,
-                    onTap: (value, index) async {
-                      setState(() {
-                        todoTasks[index!].isDone = value ?? false;
-                      });
-                      final allDate = PreferencesManager().getString(StorageKey.tasks);
-                      if (allDate != null) {
-                        List<TaskModel> allDataList =
-                            (jsonDecode(allDate) as List)
-                                .map((element) => TaskModel.fromJSON(element))
-                                .toList();
-                        final newIndex = allDataList.indexWhere(
-                          (e) => e.id == todoTasks[index!].id,
-                        );
-                        allDataList[newIndex] = todoTasks[index!];
-                        await PreferencesManager().setString(
-                          StorageKey.tasks,
-                          jsonEncode(
-                            allDataList.map((e) => e.toJeson()).toList(),
-                          ),
-                        );
-                        _loadTask();
-                      }
-                    },
-                    onDelete: (int? id) {
-                      _deletTask(id);
-                    },
-                    onEdit: () {
-                      _loadTask();
-                    },
-                  ),
-          ),
-        ),
-      ],
+    return ChangeNotifierProvider<TasksController>(
+      create: (_) => TasksController()..init(),
+      builder: (context, _) {
+        final controller = context.read<TasksController>();
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                "To Do Tasks",
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: controller.isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : Consumer<TasksController>(
+                        builder:
+                            (
+                              BuildContext context,
+                              TasksController controller,
+                              Widget? child,
+                            ) {
+                              return TaskList(
+                                emptyTask: "No To Do Tasks",
+                                tasks: controller.todoTasks,
+                                onTap: (value, index) async {
+                                  controller.donnTask(value, index);
+                                },
+                                onDelete: (int? id) {
+                                  controller.deletTask(id);
+                                },
+                                onEdit: () {
+                                  controller.init();
+                                },
+                              );
+                            },
+                      ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

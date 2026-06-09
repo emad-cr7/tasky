@@ -1,113 +1,44 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-import '../../core/constants/storage_key.dart';
-import '../../core/servies/preferences_manager.dart';
-import '../../modles/taskmodel.dart';
-import '../../core/components/sillver_task_list.dart';
+import 'package:provider/provider.dart';
+import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 import '../../core/components/task_list.dart';
 
-class HighPriortyScreen extends StatefulWidget {
+
+
+class HighPriortyScreen extends StatelessWidget {
   const HighPriortyScreen({super.key});
 
-  @override
-  State<HighPriortyScreen> createState() => _HighPriortyScreenState();
-}
-
-class _HighPriortyScreenState extends State<HighPriortyScreen> {
-  List<TaskModel> highpriortyTasks = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTask();
-  }
-
-  void _loadTask() async {
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-
-      highpriortyTasks = taskDecode
-          .map((element) => TaskModel.fromJSON(element))
-          .toList();
-      highpriortyTasks = highpriortyTasks
-          .where((element) => element.isHighPriority == true)
-          .toList()
-          .reversed
-          .toList();
-    }
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-
-      setState(() {
-        highpriortyTasks = taskDecode
-            .map((element) => TaskModel.fromJSON(element))
-            .toList();
-        highpriortyTasks = highpriortyTasks
-            .where((element) => element.isHighPriority == true)
-            .toList()
-            .reversed
-            .toList();
-      });
-    }
-  }
-
-  _deletTask(int? id) async {
-    List<TaskModel> tasks = [];
-    if (id == null) return;
-
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-      tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
-      tasks.removeWhere((e) => e.id == id);
-      setState(() {
-        highpriortyTasks.removeWhere((task) => task.id == id);
-      });
-      final updatedTask = tasks.map((element) => element.toJeson()).toList();
-      PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("High Priorty Tasks")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: TaskList(
-          emptyTask: "No Tasks",
-          tasks: highpriortyTasks,
-          onTap: (value, index) async {
-            setState(() {
-              highpriortyTasks[index!].isDone = value ?? false;
-            });
-            final allDate = PreferencesManager().getString(StorageKey.tasks);
-            if (allDate != null) {
-              List<TaskModel> allDataList = (jsonDecode(allDate) as List)
-                  .map((element) => TaskModel.fromJSON(element))
-                  .toList();
-              final newIndex = allDataList.indexWhere(
-                (e) => e.id == highpriortyTasks[index!].id,
-              );
-              allDataList[newIndex] = highpriortyTasks[index!];
-              await PreferencesManager().setString(
-                StorageKey.tasks,
-                jsonEncode(allDataList.map((e) => e.toJeson()).toList()),
-              );
-              _loadTask();
-            }
-          },
-          onDelete: (int? id) {
-            _deletTask(id);
-          },
-          onEdit: () {
-            _loadTask();
-          },
-        ),
-      ),
+    return ChangeNotifierProvider(
+      create: (_)=> TasksController()..init(),
+      builder: (context , _){
+        final controller = context.read<TasksController>();
+        return Scaffold(
+          appBar: AppBar(title: Text("High Priorty Tasks")),
+          body: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Consumer<TasksController>(
+              builder: (BuildContext context, TasksController controller, Widget? child) {
+                return TaskList(
+                  emptyTask: "No Tasks",
+                  tasks: controller.highPriorityTasks,
+                  onTap: (value, index) async {
+                    controller.doneHighPriorityTasksTask(value, index);
+                  },
+                  onDelete: (int? id) {
+                    controller.deletTask(id);
+                  },
+                  onEdit: () {
+                    controller.init();
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
