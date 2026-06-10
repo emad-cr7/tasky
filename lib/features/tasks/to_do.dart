@@ -14,10 +14,7 @@ class ToDo extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
-          child: Text(
-            "To Do Tasks",
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
+          child: Text("To Do Tasks", style: Theme.of(context).textTheme.labelSmall),
         ),
         Expanded(
           child: Padding(
@@ -25,27 +22,30 @@ class ToDo extends StatelessWidget {
             child: controller.isLoading
                 ? Center(child: CircularProgressIndicator())
                 : Consumer<TasksController>(
-              builder:
-                  (
-                  BuildContext context,
-                  TasksController controller,
-                  Widget? child,
-                  ) {
-                return TaskList(
-                  emptyTask: "No To Do Tasks",
-                  tasks: controller.todoTasks,
-                  onTap: (value, index) async {
-                    controller.doneTasks(value, controller.todoTasks[index!].id,);
-                  },
-                  onDelete: (int? id) {
-                    controller.deletTask(id);
-                  },
-                  onEdit: () {
-                    controller.init();
-                  },
-                );
-              },
-            ),
+                    builder:
+                        (
+                          BuildContext context,
+                          TasksController controller,
+                          Widget? child,
+                        ) {
+                          return TaskList(
+                            emptyTask: "No To Do Tasks",
+                            tasks: controller.todoTasks,
+                            onTap: (value, index) async {
+                              controller.doneTasks(
+                                value,
+                                controller.todoTasks[index!].id,
+                              );
+                            },
+                            onDelete: (int? id) {
+                              controller.deletTask(id);
+                            },
+                            onEdit: () {
+                              controller.init();
+                            },
+                          );
+                        },
+                  ),
           ),
         ),
       ],

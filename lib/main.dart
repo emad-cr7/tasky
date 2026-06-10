@@ -30,15 +30,15 @@ class MyApp extends StatelessWidget {
       valueListenable: ThemeController.themNotifier,
       builder: (context, ThemeMode themeMode, Widget? child) {
         return ChangeNotifierProvider<TasksController>(
-          create: (_)=>TasksController()..init(),
-            child:  MaterialApp(
-              title: 'Tasky APP',
-              debugShowCheckedModeBanner: false,
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              themeMode: themeMode,
-              home: username == null ? WelcomeScreen() : MainScreen(),
-            ),
+          create: (_) => TasksController()..init(),
+          child: MaterialApp(
+            title: 'Tasky APP',
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeMode,
+            home: username == null ? WelcomeScreen() : MainScreen(),
+          ),
         );
       },
     );

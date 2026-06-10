@@ -1,33 +1,35 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tasky/modles/taskmodel.dart';
-
 import '../../../core/constants/storage_key.dart';
 import '../../../core/servies/preferences_manager.dart';
 
+
 class TasksController with ChangeNotifier {
   bool isLoading = true;
+
   int totalTask = 0;
   int doneTask = 0;
   double percent = 0;
+
   List<TaskModel> tasks = [];
   List<TaskModel> todoTasks = [];
   List<TaskModel> completed = [];
   List<TaskModel> highPriorityTasks = [];
+
 
   init() {
     loadTask();
   }
 
   Future<void> loadTask() async {
+
     final finalTask = PreferencesManager().getString(StorageKey.tasks);
     if (finalTask != null) {
       final taskDecode = jsonDecode(finalTask) as List<dynamic>;
       tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
 
       loadData();
-
       _calculatePecent();
     }
     isLoading = false;
