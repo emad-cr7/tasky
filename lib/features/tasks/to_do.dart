@@ -14,7 +14,10 @@ class ToDo extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
-          child: Text("To Do Tasks", style: Theme.of(context).textTheme.labelSmall),
+          child: Text(
+            "To Do Tasks",
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
         ),
         Expanded(
           child: Padding(

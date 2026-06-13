@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:tasky/core/servies/preferences_manager.dart';
 import 'package:tasky/main.dart';
 import 'package:tasky/features/profile/user_detalis.dart';
+import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 import '../../core/constants/storage_key.dart';
 import '../../core/theme/theme_controller.dart';
 import '../../core/widgets/custom_svg_picture.dart';
@@ -298,44 +300,36 @@ void showImageSourcDialog(BuildContext context, Function(XFile) selectedFile) {
   );
 }
 
-void _showAlertDialog(context) {
+void _showAlertDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Log out"),
-        content: Text(
-          "Are you sure Log out of your account",
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancel"),
+      return ChangeNotifierProvider<TasksController>(
+        create: (BuildContext context) => TasksController()..init(),
+        child: AlertDialog(
+          title: Text("Log out"),
+          content: Text(
+            "Are you sure Log out of your account",
+            style: Theme.of(context).textTheme.titleMedium,
           ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Cancel"),
+            ),
 
-          TextButton(
-            onPressed: () {
-              PreferencesManager().remove(StorageKey.username);
-              PreferencesManager().remove(StorageKey.motivation);
-              PreferencesManager().remove(StorageKey.tasks);
-              PreferencesManager().remove(StorageKey.userImage);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return WelcomeScreen();
-                  },
-                ),
-                (Route<dynamic> route) => false,
-              );
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text("Log out"),
-          ),
-        ],
+            TextButton(
+              onPressed: () async {
+                context.read<TasksController>().clearTasks(context);
+              },
+
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text("Log out"),
+            ),
+          ],
+        ),
       );
     },
   );
