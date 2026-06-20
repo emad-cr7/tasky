@@ -34,41 +34,42 @@ class HomeScreen extends StatelessWidget {
 
                           child: Selector<HomeController, String?>(
                             selector: (context, controller) =>
-                            controller.userImage,
+                                controller.userImage,
                             builder:
                                 (
-                                BuildContext context,
-                                String? userImage,
-                                Widget? child,
+                                  BuildContext context,
+                                  String? userImage,
+                                  Widget? child,
                                 ) {
-                              return CircleAvatar(
-                                backgroundImage: userImage == null
-                                    ? AssetImage("assets/images/profile.png")
-                                    : FileImage(File(userImage!)),
-                                backgroundColor: Colors.transparent,
-                              );
-                            },
+                                  return CircleAvatar(
+                                    backgroundImage: userImage == null
+                                        ? AssetImage(
+                                            "assets/images/profile.png",
+                                          )
+                                        : FileImage(File(userImage!)),
+                                    backgroundColor: Colors.transparent,
+                                  );
+                                },
                           ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Selector<HomeController, String?>(
-                              selector: (context, controller) =>
-                              controller.username,
+                              selector: (context, controller) => controller.username,
                               builder:
                                   (
-                                  BuildContext context,
-                                  String? username,
-                                  Widget? child,
+                                    BuildContext context,
+                                    String? username,
+                                    Widget? child,
                                   ) {
-                                return Text(
-                                  "Good Evening ,$username ",
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.titleMedium,
-                                );
-                              },
+                                    return Text(
+                                      "Good Evening ,$username ",
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleMedium,
+                                    );
+                                  },
                             ),
                             Text(
                               "One task at a time.One step\ncloser.",

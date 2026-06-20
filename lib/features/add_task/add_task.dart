@@ -29,7 +29,7 @@ class Add_task extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomTextFromFeild(
+                            CustomTextFromField(
                               title: "Task Name",
                               controller: controller.taskNameController,
                               hint: "Finish UI design for login screen",
@@ -41,7 +41,7 @@ class Add_task extends StatelessWidget {
                             ),
                             SizedBox(height: 20),
                             SizedBox(height: 8),
-                            CustomTextFromFeild(
+                            CustomTextFromField(
                               title: "Task Description",
                               controller: controller.taskDescriptionController,
                               maxLines: 5,

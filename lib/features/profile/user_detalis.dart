@@ -42,7 +42,7 @@ class _UserDetalisState extends State<UserDetalis> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      CustomTextFromFeild(
+                      CustomTextFromField(
                         title: "User Name",
                         controller: userController,
                         hint: "User Name New",
@@ -54,15 +54,13 @@ class _UserDetalisState extends State<UserDetalis> {
                         },
                       ),
                       SizedBox(height: 20),
-                      CustomTextFromFeild(
+                      CustomTextFromField(
                         title: "Motivation Quote",
                         controller: motivationController,
                         maxLines: 5,
                         hint: "One task at a time. One step closer.",
                         validator: (String? value) {
-                          if (value == null || value
-                              .trim()
-                              .isEmpty) {
+                          if (value == null || value.trim().isEmpty) {
                             return "Please Enter User Name";
                           }
                           return null;

@@ -72,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomTextFromFeild(
+                          CustomTextFromField(
                             title: "Full Name",
                             controller: controller,
                             hint: "Enter Full Name",

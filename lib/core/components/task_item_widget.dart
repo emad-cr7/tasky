@@ -177,7 +177,7 @@ class TaskItemWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 12),
-                            CustomTextFromFeild(
+                            CustomTextFromField(
                               title: "Task Name",
                               controller: taskNameController,
                               hint: "Finish UI design for login screen",
@@ -188,7 +188,7 @@ class TaskItemWidget extends StatelessWidget {
                               },
                             ),
                             SizedBox(height: 20),
-                            CustomTextFromFeild(
+                            CustomTextFromField(
                               title: "Task Description",
                               controller: taskDescriptionController,
                               maxLines: 5,
