@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
-
-import '../widgets/custom_check_box.dart';
 import '../../modles/taskmodel.dart';
 
 class TaskList extends StatelessWidget {
@@ -27,31 +26,43 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return tasks.isEmpty
         ? Center(
-      child: Text(
-        emptyTask ?? "",
-        style: Theme.of(context).textTheme.displaySmall,
-      ),
-    )
+            child: Text(
+              emptyTask ?? "",
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+          )
         : SingleChildScrollView(
-          child: ListView.separated(
+            child: AnimationLimiter(
+              child: ListView.separated(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: tasks.length,
                 padding: EdgeInsets.only(bottom: 60),
-                itemBuilder: (BuildContext context, int index) {
-          return TaskItemWidget(
-            model: tasks[index],
-            onChanged: (bool? value) {
-              onTap(value, index);
-            }, onDelete: (int id) {
-            onDelete(id);
-          }, onEdit: onEdit,
-          );
+                itemBuilder: (context, index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: Duration(milliseconds: 500),
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: TaskItemWidget(
+                          model: tasks[index],
+                          onChanged: (bool? value) {
+                            onTap(value, index);
+                          },
+                          onDelete: (int id) {
+                            onDelete(id);
+                          },
+                          onEdit: onEdit,
+                        ),
+                      ),
+                    ),
+                  );
                 },
                 separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(height: 8);
+                  return SizedBox(height: 8);
                 },
               ),
-        );
+            ),
+          );
   }
 }
