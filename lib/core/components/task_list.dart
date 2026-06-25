@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
+import 'package:tasky/core/widgets/animation/custom_animation4.dart';
 import '../../modles/taskmodel.dart';
+import '../widgets/animation/custom_animation.dart';
 
 class TaskList extends StatelessWidget {
   TaskList({
@@ -26,11 +26,13 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return tasks.isEmpty
         ? Center(
-            child: Text(
+            child: CustomAnimation4(child:Text(
               emptyTask ?? "",
               style: Theme.of(context).textTheme.displaySmall,
-            ),
+            ), )
           )
+
+
         : SingleChildScrollView(
             child: AnimationLimiter(
               child: ListView.separated(

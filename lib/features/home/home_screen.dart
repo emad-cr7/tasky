@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/widgets/animation/custom_animation.dart';
+import 'package:tasky/core/widgets/animation/custom_animation2.dart';
 import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 
+import '../../core/widgets/animation/custom_animation4.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import 'components/achieved_tasks.dart';
 import 'components/high_priority_tasks.dart';
@@ -80,23 +83,32 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 16),
-                    Text(
-                      textAlign: TextAlign.start,
-                      "Yuhuu ,Your work Is",
-                      style: Theme.of(context).textTheme.displayLarge,
+
+                    CustomAnimation2(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            textAlign: TextAlign.start,
+                            "Yuhuu ,Your work Is",
+                            style: Theme.of(context).textTheme.displayLarge,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                textAlign: TextAlign.start,
+                                "almost done !  ",
+                                style: Theme.of(context).textTheme.displayLarge,
+                              ),
+                              CustomSvgPicture.withColor(
+                                path: "assets/images/waving_hand.svg",
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          textAlign: TextAlign.start,
-                          "almost done !  ",
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
-                        CustomSvgPicture.withColor(
-                          path: "assets/images/waving_hand.svg",
-                        ),
-                      ],
-                    ),
+
                     SizedBox(height: 16),
                     AchievedTasks(),
                     SizedBox(height: 8),
@@ -120,24 +132,26 @@ class HomeScreen extends StatelessWidget {
           height: 44,
           child: Builder(
             builder: (BuildContext context) {
-              return FloatingActionButton.extended(
-                onPressed: () async {
-                  final bool? result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Add_task();
-                      },
-                    ),
-                  );
-                  if (result != null && result) {
-                    context.read<TasksController>().init();
-                  }
-                },
-                label: Text("Add New Task"),
-                icon: Icon(Icons.add),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
+              return CustomAnimation4(
+                child: FloatingActionButton.extended(
+                  onPressed: () async {
+                    final bool? result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Add_task();
+                        },
+                      ),
+                    );
+                    if (result != null && result) {
+                      context.read<TasksController>().init();
+                    }
+                  },
+                  label: Text("Add New Task"),
+                  icon: Icon(Icons.add),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
                 ),
               );
             },
