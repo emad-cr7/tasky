@@ -6,6 +6,11 @@ class AppSizes {
   static final double sp8 = 8.sp;
   static final double sp14 = 14.sp;
   static final double sp16 = 16.sp;
+  static final double sp17 = 17.sp;
+  static final double sp20 = 20.sp;
+  static final double sp24 = 24.sp;
+  static final double sp28 = 28.sp;
+  static final double sp32 = 32.sp;
 
   /// height
   static final double h8 = 8.h;
@@ -24,6 +29,7 @@ class AppSizes {
 
 
   /// width
+  static final double w2 = 2.w;
   static final double w8 = 8.w;
   static final double w12 = 12.w;
   static final double w15 = 15.w;
@@ -50,6 +56,8 @@ class AppSizes {
 
   /// Radius
 
+  static final double r4= 4.r;
+  static final double r16= 16.r;
   static final double r20= 20.r;
   static final double r50= 50.r;
 

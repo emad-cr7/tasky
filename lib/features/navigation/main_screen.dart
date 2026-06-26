@@ -21,16 +21,16 @@ class _MainScreenState extends State<MainScreen> {
     Profile(),
   ];
 
-  int _crrentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _crrentIndex,
+        currentIndex: _currentIndex,
         onTap: (int? index) {
           setState(() {
-            _crrentIndex = index ?? 0;
+            _currentIndex = index ?? 0;
           });
         },
         items: [
@@ -53,14 +53,14 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: SafeArea(child: _screen[_crrentIndex]),
+      body: SafeArea(child: _screen[_currentIndex]),
     );
   }
 
   SvgPicture _buildSvgPicture(String path, int crrentIndex) => SvgPicture.asset(
     path,
     colorFilter: ColorFilter.mode(
-      _crrentIndex == crrentIndex
+      _currentIndex == crrentIndex
           ? Color(0xff15B86C)
           : ThemeController.isDark()
           ? Color(0xffC6C6C6)
