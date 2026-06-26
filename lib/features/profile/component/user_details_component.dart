@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tasky/core/widgets/animation/custom_animation2.dart';
 import '../../../core/widgets/custom_svg_picture.dart';
 import '../user_detalis.dart';
 class UserDetailsComponent extends StatelessWidget {
@@ -15,7 +14,6 @@ class UserDetailsComponent extends StatelessWidget {
           children: [
             SizedBox(width: 2),
             Expanded(
-              child: CustomAnimation2(
                 child: ListTile(
                   title: Text("User Details"),
                   contentPadding: EdgeInsets.zero,
@@ -44,7 +42,6 @@ class UserDetailsComponent extends StatelessWidget {
                     }
                   },
                 ),
-              ),
             ),
           ],
         ),

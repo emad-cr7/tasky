@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tasky/core/widgets/animation/custom_animation2.dart';
-import 'package:tasky/core/widgets/animation/custom_animation3.dart';
-import 'package:tasky/core/widgets/animation/custom_animation4.dart';
 import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../core/widgets/custom_svg_picture.dart';
@@ -31,17 +28,13 @@ class WelcomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomAnimation2(
-                          child: CustomSvgPicture.withColor(
-                            path: "assets/images/Vector.svg",
-                          ),
+                        CustomSvgPicture.withColor(
+                          path: "assets/images/Vector.svg",
                         ),
                         SizedBox(width: 16),
-                        CustomAnimation2(
-                          child: Text(
-                            "Tasky",
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
+                        Text(
+                          "Tasky",
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ],
                     ),
@@ -49,83 +42,72 @@ class WelcomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomAnimation2(
-                          child: Text(
-                            "Welcome To Tasky ",
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
+                        Text(
+                          "Welcome To Tasky ",
+                          style: Theme.of(context).textTheme.displaySmall,
                         ),
                         SizedBox(width: 8),
-                        CustomAnimation3(
-                          child: CustomSvgPicture.withColor(
-                            path: "assets/images/waving_hand.svg",
-                          ),
+                        CustomSvgPicture.withColor(
+                          path: "assets/images/waving_hand.svg",
                         ),
                       ],
                     ),
                     SizedBox(height: 8),
-                    CustomAnimation2(
-                      child: Text(
-                        "Your productivity journey starts here.",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.displaySmall!.copyWith(fontSize: 16),
-                      ),
+                    Text(
+                      "Your productivity journey starts here.",
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displaySmall!.copyWith(fontSize: 16),
                     ),
                     SizedBox(height: 24),
-                    CustomAnimation3(
-                      child: SvgPicture.asset(
-                        "assets/images/pana.svg",
-                        width: 215,
-                        height: 200,
-                      ),
+                    SvgPicture.asset(
+                      "assets/images/pana.svg",
+                      width: 215,
+                      height: 200,
                     ),
                     SizedBox(height: 24),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: CustomAnimation4(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomTextFromField(
-                              title: "Full Name",
-                              controller: controller,
-                              hint: "Enter Full Name",
-                              validator: (value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return "Please Enter Your Full Name";
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
+
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomTextFromField(
+                            title: "Full Name",
+                            controller: controller,
+                            hint: "Enter Full Name",
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Please Enter Your Full Name";
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 24),
-                    CustomAnimation4(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(fixedSize: Size(340, 40)),
-                        onPressed: () async {
-                          if (_key.currentState?.validate() ?? false) {
-                            await PreferencesManager().setString(
-                              StorageKey.username,
-                              controller.text,
-                            );
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(fixedSize: Size(340, 40)),
+                      onPressed: () async {
+                        if (_key.currentState?.validate() ?? false) {
+                          await PreferencesManager().setString(
+                            StorageKey.username,
+                            controller.text,
+                          );
 
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return MainScreen();
-                                },
-                              ),
-                            );
-                          } else {}
-                        },
-                        child: Text("Let’s Get Started"),
-                      ),
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return MainScreen();
+                              },
+                            ),
+                          );
+                        } else {}
+                      },
+                      child: Text("Let’s Get Started"),
                     ),
                   ],
                 ),

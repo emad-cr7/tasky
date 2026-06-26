@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:tasky/core/widgets/animation/custom_animation2.dart';
 
 import '../../../core/theme/theme_controller.dart';
+import '../../../core/widgets/animation/custom_animation.dart';
+import '../../../core/widgets/animation/custom_animation2.dart';
 import '../../../core/widgets/custom_check_box.dart';
 import '../../tasks/cotrollers/tasks_controller.dart';
 import '../../tasks/high_priorty_screen.dart';

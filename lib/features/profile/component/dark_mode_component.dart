@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tasky/core/widgets/animation/custom_animation3.dart';
 
 import '../../../core/theme/theme_controller.dart';
 import '../../../core/widgets/custom_svg_picture.dart';
@@ -15,7 +14,6 @@ class DarkModeComponent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: CustomAnimation3(
                 child: ListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text("Dark Mode"),
@@ -34,7 +32,6 @@ class DarkModeComponent extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
           ],
         ),
         SizedBox(height: 5),

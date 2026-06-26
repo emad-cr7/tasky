@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
-import 'package:tasky/core/widgets/animation/custom_animation2.dart';
 import 'package:tasky/core/widgets/animation/custom_animation4.dart';
+
 
 import '../../../core/widgets/animation/custom_animation.dart';
 import '../../tasks/cotrollers/tasks_controller.dart';
@@ -21,12 +21,10 @@ class Silver_task_list extends StatelessWidget {
             return tasksList.isEmpty
                 ? SliverFillRemaining(
                     hasScrollBody: false,
-                    child: CustomAnimation4(
-                      child: Center(
-                        child: Text(
-                          emptyTask ?? "",
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
+                    child: Center(
+                      child: Text(
+                        emptyTask ?? "",
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
                     ),
                   )

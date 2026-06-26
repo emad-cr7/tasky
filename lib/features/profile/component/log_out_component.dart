@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:tasky/core/widgets/animation/custom_animation2.dart';
 
 import '../../tasks/cotrollers/tasks_controller.dart';
 
@@ -16,7 +15,6 @@ class LogOutComponent extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: CustomAnimation2(
                 child: ListTile(
                   title: Text(
                     "Log Out",
@@ -47,7 +45,6 @@ class LogOutComponent extends StatelessWidget {
                   },
                 ),
               ),
-            ),
           ],
         ),
 

@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tasky/core/widgets/animation/custom_animation.dart';
-import 'package:tasky/core/widgets/animation/custom_animation2.dart';
+import 'package:tasky/core/widgets/animation/custom_animation4.dart';
 import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 
-import '../../core/widgets/animation/custom_animation4.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import 'components/achieved_tasks.dart';
 import 'components/high_priority_tasks.dart';
@@ -59,7 +57,8 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Selector<HomeController, String?>(
-                              selector: (context, controller) => controller.username,
+                              selector: (context, controller) =>
+                                  controller.username,
                               builder:
                                   (
                                     BuildContext context,
@@ -84,29 +83,27 @@ class HomeScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
 
-                    CustomAnimation2(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            textAlign: TextAlign.start,
-                            "Yuhuu ,Your work Is",
-                            style: Theme.of(context).textTheme.displayLarge,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                textAlign: TextAlign.start,
-                                "almost done !  ",
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                              CustomSvgPicture.withColor(
-                                path: "assets/images/waving_hand.svg",
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          textAlign: TextAlign.start,
+                          "Yuhuu ,Your work Is",
+                          style: Theme.of(context).textTheme.displayLarge,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              textAlign: TextAlign.start,
+                              "almost done !  ",
+                              style: Theme.of(context).textTheme.displayLarge,
+                            ),
+                            CustomSvgPicture.withColor(
+                              path: "assets/images/waving_hand.svg",
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
 
                     SizedBox(height: 16),
