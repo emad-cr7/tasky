@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/widgets/animation/custom_animation4.dart';
 import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
-
+import '../../core/constants/app_sizes.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import 'components/achieved_tasks.dart';
 import 'components/high_priority_tasks.dart';
@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: AppSizes.h16),
 
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,12 +106,12 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 16),
+                    SizedBox(height: AppSizes.h16),
                     AchievedTasks(),
-                    SizedBox(height: 8),
+                    SizedBox(height: AppSizes.h8),
                     HighPriorityTasks(),
                     Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 16),
+                      padding:  EdgeInsets.only(top: AppSizes.ph24, bottom: AppSizes.ph16),
                       child: Text(
                         'My Tasks',
                         style: Theme.of(context).textTheme.labelSmall,
@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
         ),
 
         floatingActionButton: SizedBox(
-          height: 44,
+          height: AppSizes.h44,
           child: Builder(
             builder: (BuildContext context) {
               return CustomAnimation4(

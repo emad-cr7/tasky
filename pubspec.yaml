@@ -42,6 +42,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   flutter_animate: ^4.5.2
   animated_theme_switcher: ^2.0.10
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

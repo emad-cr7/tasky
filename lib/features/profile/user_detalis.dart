@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../core/widgets/custom_text_from_feild.dart';
@@ -82,11 +83,10 @@ class _UserDetalisState extends State<UserDetalis> {
                     Navigator.of(context).pop(true);
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(double.maxFinite, 40),
-                ),
+
                 child: Text("Save Changes"),
               ),
+              SizedBox(height: AppSizes.ph24,)
             ],
           ),
         ),

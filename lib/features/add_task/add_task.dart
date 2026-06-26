@@ -83,9 +83,7 @@ class Add_task extends StatelessWidget {
                     SizedBox(height: 20),
 
                     ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(MediaQuery.of(context).size.width, 40),
-                      ),
+
 
                       onPressed: () async {
                         context.read<AddTaskController>().addTask(context);

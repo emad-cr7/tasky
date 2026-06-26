@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../constants/app_sizes.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -35,19 +38,17 @@ ThemeData lightTheme = ThemeData(
     trackOutlineWidth: WidgetStateProperty.all(2),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStateProperty.all(Color(0xff15B86C)),
-      foregroundColor: WidgetStateProperty.all(Color(0xffFFFCFC)),
-      textStyle: WidgetStatePropertyAll(
-        TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-      ),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color(0xff15B86C),
+      foregroundColor: Color(0xffFFFCFC),
+      textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+      minimumSize: Size.fromHeight(AppSizes.h40),
     ),
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
       foregroundColor: WidgetStateProperty.all(Color(0xff161F1B)),
-
-    )
+    ),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: (Color(0xff15B86C)),
@@ -56,40 +57,40 @@ ThemeData lightTheme = ThemeData(
   ),
   textTheme: TextTheme(
     displaySmall: TextStyle(
-      fontSize: 24,
+      fontSize: 24.sp,
       color: Color(0XFF161F1B),
       fontWeight: FontWeight.w400,
     ),
     displayMedium: TextStyle(
-      fontSize: 28,
+      fontSize: 28.sp,
       color: Color(0xff161F1B),
       fontWeight: FontWeight.w400,
     ),
     displayLarge: TextStyle(
-      fontSize: 32,
+      fontSize: 32.sp,
       color: Color(0xff161F1B),
       fontWeight: FontWeight.w400,
     ),
     titleSmall: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w400,
     ),
     titleMedium: TextStyle(
       color: Color(0xff161F1B),
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
     ),
     titleLarge: TextStyle(
       color: Color(0xff6A6A6A),
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.lineThrough,
       decorationColor: Color(0xff6A6A6A),
       overflow: TextOverflow.ellipsis,
     ),
-    labelSmall: TextStyle(color: Color(0XFF161F1B), fontSize: 20),
-    labelMedium: TextStyle(color: Color(0XFF161F1B), fontSize: 16),
+    labelSmall: TextStyle(color: Color(0XFF161F1B), fontSize: 20.sp),
+    labelMedium: TextStyle(color: Color(0XFF161F1B), fontSize: 16.sp),
   ),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(color: Color(0XFF9E9E9E)),
@@ -137,18 +138,14 @@ ThemeData lightTheme = ThemeData(
   ),
   splashFactory: NoSplash.splashFactory,
   popupMenuTheme: PopupMenuThemeData(
-      color: Color(0xffF6F7F9),
-      elevation: 5,
-      shadowColor: Colors.black,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(16),
-      ),
-      labelTextStyle: WidgetStateProperty.all(
-          TextStyle(
-          fontSize: 17 ,
-          fontWeight: FontWeight.w400 ,
-            color: Colors.black
-      ))
+    color: Color(0xffF6F7F9),
+    elevation: 5,
+    shadowColor: Colors.black,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadiusGeometry.circular(16),
+    ),
+    labelTextStyle: WidgetStateProperty.all(
+      TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
+    ),
   ),
-
 );
