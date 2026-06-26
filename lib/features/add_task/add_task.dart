@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/features/add_task/add_task_controller.dart';
 import '../../core/widgets/custom_text_from_feild.dart';
 
@@ -17,13 +18,13 @@ class Add_task extends StatelessWidget {
           appBar: AppBar(title: Text("New Task")),
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding:  EdgeInsets.symmetric(horizontal:AppSizes.h16 , vertical: AppSizes.w8 ),
               child: Form(
                 key: controller.key,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 8),
+                    SizedBox(height:AppSizes.h8),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -39,8 +40,7 @@ class Add_task extends StatelessWidget {
                                 }
                               },
                             ),
-                            SizedBox(height: 20),
-                            SizedBox(height: 8),
+                            SizedBox(height:AppSizes.h20),
                             CustomTextFromField(
                               title: "Task Description",
                               controller: controller.taskDescriptionController,
@@ -79,12 +79,8 @@ class Add_task extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    SizedBox(height: 20),
-
+                    SizedBox(height:AppSizes.h20),
                     ElevatedButton.icon(
-
-
                       onPressed: () async {
                         context.read<AddTaskController>().addTask(context);
                       },

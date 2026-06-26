@@ -96,7 +96,7 @@ ThemeData darkTheme = ThemeData(
     labelMedium: TextStyle(color: Color(0XFFFFFCFC), fontSize: AppSizes.sp24),
   ),
   inputDecorationTheme: InputDecorationTheme(
-    hintStyle: TextStyle(color: Color(0xff6D6D6D)),
+    hintStyle: TextStyle(color: Color(0xff6D6D6D) , fontSize: AppSizes.sp16),
     filled: true,
     fillColor: Color(0xff282828),
     focusedBorder: OutlineInputBorder(

@@ -92,7 +92,7 @@ ThemeData lightTheme = ThemeData(
     labelMedium: TextStyle(color: Color(0XFF161F1B), fontSize:  AppSizes.sp24),
   ),
   inputDecorationTheme: InputDecorationTheme(
-    hintStyle: TextStyle(color: Color(0XFF9E9E9E)),
+    hintStyle: TextStyle(color: Color(0XFF9E9E9E) ,fontSize: AppSizes.sp16),
     filled: true,
     fillColor: Color(0XFFFFFFFF),
     focusColor: Color(0xffD1DAD6),

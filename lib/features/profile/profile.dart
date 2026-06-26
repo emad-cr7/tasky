@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/features/profile/profile_controller.dart';
-import 'package:tasky/features/profile/user_detalis.dart';
-import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 import '../../core/theme/theme_controller.dart';
-import '../../core/widgets/animation/custom_animation.dart';
-import '../../core/widgets/custom_svg_picture.dart';
 import 'component/dark_mode_component.dart';
 import 'component/log_out_component.dart';
 import 'component/user_details_component.dart';
@@ -25,7 +22,7 @@ class Profile extends StatelessWidget {
           return controller.isLoading
               ? Center(child: CircularProgressIndicator())
               : Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding:  EdgeInsets.all(AppSizes.w16),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +31,7 @@ class Profile extends StatelessWidget {
                           "My Profile",
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: AppSizes.h16),
                         Center(
                           child: Column(
                             children: [
@@ -50,7 +47,7 @@ class Profile extends StatelessWidget {
                                         : FileImage(
                                             File(controller.userImage!),
                                           ),
-                                    radius: 60,
+                                    radius:AppSizes.r60,
                                     backgroundColor: Colors.transparent,
                                   ),
                                   GestureDetector(
@@ -64,11 +61,11 @@ class Profile extends StatelessWidget {
                                       );
                                     },
                                     child: Container(
-                                      width: 45,
-                                      height: 45,
+                                      width:AppSizes.h45 ,
+                                      height:AppSizes.w45 ,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
-                                          100,
+                                          AppSizes.r100,
                                         ),
                                         border: ThemeController.isDark()
                                             ? null
@@ -88,7 +85,7 @@ class Profile extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 8),
+                              SizedBox(height: AppSizes.h8),
                               Column(
                                 children: [
                                   Text(
@@ -106,7 +103,7 @@ class Profile extends StatelessWidget {
                                   context,
                                 ).textTheme.titleMedium,
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: AppSizes.h20),
                             ],
                           ),
                         ),
@@ -121,7 +118,7 @@ class Profile extends StatelessWidget {
                             UserDetailsComponent(controller: controller,),
                             SizedBox(height: 10),
                             DarkModeComponent(),
-                            SizedBox(height: 5),
+                            SizedBox(height: AppSizes.h5),
                             LogOutComponent(),
                           ],
                         ),

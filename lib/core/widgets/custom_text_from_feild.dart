@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 
 class CustomTextFromField extends StatelessWidget {
   const CustomTextFromField({
@@ -29,9 +30,9 @@ class CustomTextFromField extends StatelessWidget {
           title,
           style: Theme.of(
             context,
-          ).textTheme.displaySmall!.copyWith(fontSize: 16),
+          ).textTheme.displaySmall!.copyWith(fontSize: AppSizes.sp16),
         ),
-        SizedBox(height: 8),
+        SizedBox(height: AppSizes.h8),
         TextFormField(
           maxLines: maxLines,
           controller: controller,
@@ -40,7 +41,6 @@ class CustomTextFromField extends StatelessWidget {
           validator: validator != null
               ? (String? value) => validator!(value)
               : null,
-
           decoration: InputDecoration(hintText: "$hint", counterText: ''),
         ),
       ],
