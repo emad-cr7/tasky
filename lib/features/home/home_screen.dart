@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       create: (context) => HomeController()..init(),
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding:  EdgeInsets.all(AppSizes.pw16),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(right: 8),
+                          padding: EdgeInsets.only(right: AppSizes.w8),
 
                           child: Selector<HomeController, String?>(
                             selector: (context, controller) =>

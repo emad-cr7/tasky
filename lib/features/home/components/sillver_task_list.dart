@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/widgets/animation/custom_animation4.dart';
 
 
@@ -29,7 +30,7 @@ class Silver_task_list extends StatelessWidget {
                     ),
                   )
                 : SliverPadding(
-                    padding: EdgeInsetsGeometry.only(bottom: 55),
+                    padding: EdgeInsetsGeometry.only(bottom: AppSizes.ph80),
                     sliver: SliverList.separated(
                       itemCount: tasksList.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -47,7 +48,7 @@ class Silver_task_list extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 8);
+                        return SizedBox(height: AppSizes.ph8);
                       },
                     ),
                   );

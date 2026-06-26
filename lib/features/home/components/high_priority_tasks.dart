@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 
 import '../../../core/theme/theme_controller.dart';
 import '../../../core/widgets/animation/custom_animation.dart';
@@ -24,7 +25,7 @@ class HighPriorityTasks extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppSizes.r20),
               border: Border.all(
                 color: ThemeController.isDark()
                     ? Colors.transparent
@@ -32,7 +33,7 @@ class HighPriorityTasks extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding:  EdgeInsets.all(AppSizes.w16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -45,7 +46,7 @@ class HighPriorityTasks extends StatelessWidget {
                           "High Priority Tasks",
                           style: TextStyle(
                             color: Color(0XFF15B86C),
-                            fontSize: 14,
+                            fontSize:AppSizes.sp14,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -93,8 +94,8 @@ class HighPriorityTasks extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             Container(
-                              height: 56,
-                              width: 48,
+                              height:AppSizes.h56 ,
+                              width: AppSizes.w48 ,
                               decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.primaryContainer,
                                 shape: BoxShape.circle,
@@ -106,8 +107,8 @@ class HighPriorityTasks extends StatelessWidget {
                             ),
                             SvgPicture.asset(
                               "assets/images/back2.svg",
-                              height: 15,
-                              width: 15,
+                              height: AppSizes.h15,
+                              width: AppSizes.w15,
                               colorFilter: ColorFilter.mode(
                                   ThemeController.isDark()
                                       ?Color(0xffC6C6C6)

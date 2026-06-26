@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/widgets/custom_text_from_feild.dart';
 import 'package:tasky/modles/taskmodel.dart';
@@ -27,11 +28,11 @@ class TaskItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: 56,
+      height: AppSizes.h56 ,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSizes.r20),
         border: Border.all(
           color: ThemeController.isDark()
               ? Colors.transparent
@@ -40,13 +41,13 @@ class TaskItemWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 8),
+          SizedBox(width: AppSizes.w8),
           CustomCheckBox(
             value: model.isDone,
             onChanged: (bool? value) => onChanged(value),
           ),
 
-          SizedBox(width: 16),
+          SizedBox(width: AppSizes.w16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +66,7 @@ class TaskItemWidget extends StatelessWidget {
                     model.description,
                     style: TextStyle(
                       color: Color(0xffC6C6C6),
-                      fontSize: 14,
+                      fontSize: AppSizes.sp14,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -159,7 +160,7 @@ class TaskItemWidget extends StatelessWidget {
         return StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding:  EdgeInsets.symmetric(horizontal:AppSizes.h16, vertical:AppSizes.w8),
               child: Form(
                 key: _key,
                 child: Column(
@@ -169,14 +170,14 @@ class TaskItemWidget extends StatelessWidget {
                       thickness: 5,
                       indent: 150,
                       endIndent: 150,
-                      radius: BorderRadius.circular(50),
+                      radius: BorderRadius.circular(AppSizes.r50),
                     ),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 12),
+                            SizedBox(height:AppSizes.h12),
                             CustomTextFromField(
                               title: "Task Name",
                               controller: taskNameController,
@@ -187,7 +188,7 @@ class TaskItemWidget extends StatelessWidget {
                                 }
                               },
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: AppSizes.h20),
                             CustomTextFromField(
                               title: "Task Description",
                               controller: taskDescriptionController,
@@ -195,7 +196,7 @@ class TaskItemWidget extends StatelessWidget {
                               hint:
                               "Finish onboarding UI and hand off to devs by Thursday.",
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: AppSizes.w8),
 
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -221,13 +222,9 @@ class TaskItemWidget extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: AppSizes.h20),
 
                     ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(MediaQuery.of(context).size.width, 40),
-                      ),
-
                       onPressed: () async {
                         if (_key.currentState?.validate() ?? false) {
                           final taskJson = await PreferencesManager().getString(
@@ -268,7 +265,7 @@ class TaskItemWidget extends StatelessWidget {
                       label: Text("Edit Task"),
                       icon: Icon(Icons.edit),
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(height: AppSizes.h20)
                   ],
                 ),
               ),
