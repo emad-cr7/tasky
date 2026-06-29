@@ -18,13 +18,13 @@ class Add_task extends StatelessWidget {
           appBar: AppBar(title: Text("New Task")),
           body: SafeArea(
             child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal:AppSizes.h16 , vertical: AppSizes.w8 ),
+              padding:  EdgeInsets.symmetric(horizontal:AppSizes.pw16 , vertical: AppSizes.ph8 ),
               child: Form(
                 key: controller.key,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height:AppSizes.h8),
+                    SizedBox(height:AppSizes.ph8),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -40,7 +40,7 @@ class Add_task extends StatelessWidget {
                                 }
                               },
                             ),
-                            SizedBox(height:AppSizes.h20),
+                            SizedBox(height:AppSizes.ph20),
                             CustomTextFromField(
                               title: "Task Description",
                               controller: controller.taskDescriptionController,
@@ -48,6 +48,7 @@ class Add_task extends StatelessWidget {
                               hint:
                               "Finish onboarding UI and hand off to devs by Thursday.",
                             ),
+                            SizedBox(height:AppSizes.ph20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -65,7 +66,6 @@ class Add_task extends StatelessWidget {
                                       Widget? child,
                                       ) {
                                     return Switch(
-
                                       value: value.isHighPriority,
                                       onChanged: (bool value) {
                                         controller.toggle(value);
@@ -79,7 +79,6 @@ class Add_task extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height:AppSizes.h20),
                     ElevatedButton.icon(
                       onPressed: () async {
                         context.read<AddTaskController>().addTask(context);

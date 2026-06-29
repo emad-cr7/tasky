@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_sizes.dart';
 import '../../../core/theme/theme_controller.dart';
 import '../../../core/widgets/custom_svg_picture.dart';
 
@@ -34,7 +35,6 @@ class DarkModeComponent extends StatelessWidget {
               ),
           ],
         ),
-        SizedBox(height: 5),
         Divider(thickness: 1),
       ],
     );

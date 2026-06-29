@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/features/profile/profile_controller.dart';
 import '../../core/theme/theme_controller.dart';
-import 'component/dark_mode_component.dart';
-import 'component/log_out_component.dart';
-import 'component/user_details_component.dart';
+import 'components/dark_mode_component.dart';
+import 'components/log_out_component.dart';
+import 'components/user_details_component.dart';
+
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -47,7 +47,7 @@ class Profile extends StatelessWidget {
                                         : FileImage(
                                             File(controller.userImage!),
                                           ),
-                                    radius:AppSizes.r60,
+                                    radius:60,
                                     backgroundColor: Colors.transparent,
                                   ),
                                   GestureDetector(
@@ -61,8 +61,8 @@ class Profile extends StatelessWidget {
                                       );
                                     },
                                     child: Container(
-                                      width:AppSizes.h45 ,
-                                      height:AppSizes.w45 ,
+                                      width:AppSizes.w34 ,
+                                      height:AppSizes.h34 ,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
                                           AppSizes.r100,
@@ -103,7 +103,7 @@ class Profile extends StatelessWidget {
                                   context,
                                 ).textTheme.titleMedium,
                               ),
-                              SizedBox(height: AppSizes.h20),
+                              SizedBox(height: AppSizes.ph24),
                             ],
                           ),
                         ),
@@ -114,11 +114,11 @@ class Profile extends StatelessWidget {
                               "Profile Info",
                               style: Theme.of(context).textTheme.labelSmall,
                             ),
-                            SizedBox(height: 19),
+                            SizedBox(height: AppSizes.h16),
                             UserDetailsComponent(controller: controller,),
-                            SizedBox(height: 10),
+                            SizedBox(height: AppSizes.h8),
                             DarkModeComponent(),
-                            SizedBox(height: AppSizes.h5),
+                            SizedBox(height: AppSizes.h8),
                             LogOutComponent(),
                           ],
                         ),

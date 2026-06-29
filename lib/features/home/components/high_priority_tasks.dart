@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/constants/app_sizes.dart';
 
 import '../../../core/theme/theme_controller.dart';
-import '../../../core/widgets/animation/custom_animation.dart';
 import '../../../core/widgets/animation/custom_animation2.dart';
 import '../../../core/widgets/custom_check_box.dart';
 import '../../tasks/cotrollers/tasks_controller.dart';
-import '../../tasks/high_priorty_screen.dart';
+import '../../tasks/high_priority_screen.dart';
 
 class HighPriorityTasks extends StatelessWidget {
   const HighPriorityTasks({
@@ -60,16 +58,16 @@ class HighPriorityTasks extends StatelessWidget {
                                   controller.doneTasks(value, task.id);
                                 },
                               ),
-          
-                              Expanded(
-                                child: Text(
-                                  maxLines: 1,
-                                  task.taskName,
-                                  style: task.isDone
-                                      ? Theme.of(context).textTheme.titleLarge
-                                      : Theme.of(context).textTheme.titleMedium,
+
+                                 Expanded(
+                                  child: Text(
+                                    maxLines: 1,
+                                    task.taskName,
+                                    style: task.isDone
+                                        ? Theme.of(context).textTheme.titleLarge
+                                        : Theme.of(context).textTheme.titleMedium,
+                                  ),
                                 ),
-                              ),
                             ],
                           );
                         }),
@@ -84,7 +82,7 @@ class HighPriorityTasks extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return HighPriortyScreen();
+                                return HighPriorityScreen();
                               },
                             ),
                           );
@@ -107,8 +105,8 @@ class HighPriorityTasks extends StatelessWidget {
                             ),
                             SvgPicture.asset(
                               "assets/images/back2.svg",
-                              height: AppSizes.h15,
-                              width: AppSizes.w15,
+                              height: AppSizes.h16,
+                              width: AppSizes.w16,
                               colorFilter: ColorFilter.mode(
                                   ThemeController.isDark()
                                       ?Color(0xffC6C6C6)

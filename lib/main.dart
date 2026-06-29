@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
 import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
-import 'package:tasky/features/welcome/Welcome_Screen.dart';
+import 'package:tasky/features/welcome/welcome_screen.dart';
 import 'package:tasky/features/navigation/main_screen.dart';
 import 'core/constants/storage_key.dart';
 import 'core/servies/preferences_manager.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/constants/storage_key.dart';
 import '../../core/servies/preferences_manager.dart';
-import '../../modles/taskmodel.dart';
+import '../../models/task_model.dart';
 
 class AddTaskController with ChangeNotifier {
   final GlobalKey<FormState> key = GlobalKey();

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 import '../../core/components/task_list.dart';
+import '../../core/constants/app_sizes.dart';
 
-class HighPriortyScreen extends StatelessWidget {
-  const HighPriortyScreen({super.key});
+class HighPriorityScreen extends StatelessWidget {
+  const HighPriorityScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class HighPriortyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("High Priorty Tasks")),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding:  EdgeInsets.all(AppSizes.pw16),
         child: Consumer<TasksController>(
           builder:
               (

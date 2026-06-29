@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/constants/app_sizes.dart';
 import '../../tasks/cotrollers/tasks_controller.dart';
 
 class LogOutComponent extends StatelessWidget {
@@ -20,7 +21,7 @@ class LogOutComponent extends StatelessWidget {
                     "Log Out",
                     style: TextStyle(
                       color: Colors.red,
-                      fontSize: 20,
+                      fontSize: AppSizes.sp20,
                       fontWeight: FontWeight.w400,
                     ),
                   ),

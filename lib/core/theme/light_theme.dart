@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constants/app_sizes.dart';
-
 ThemeData lightTheme = ThemeData(
+
   useMaterial3: true,
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(
@@ -147,4 +146,4 @@ ThemeData lightTheme = ThemeData(
       TextStyle(fontSize: AppSizes.sp20, fontWeight: FontWeight.w400, color: Colors.black),
     ),
   ),
-);
+  );

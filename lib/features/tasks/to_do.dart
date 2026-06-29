@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/features/tasks/cotrollers/tasks_controller.dart';
 import '../../core/components/task_list.dart';
+import '../../core/constants/app_sizes.dart';
 
 class ToDo extends StatelessWidget {
   const ToDo({super.key});
@@ -13,7 +14,7 @@ class ToDo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding:  EdgeInsets.all(AppSizes.pw16),
           child: Text(
             "To Do Tasks",
             style: Theme.of(context).textTheme.labelSmall,
@@ -21,7 +22,7 @@ class ToDo extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding:  EdgeInsets.all(AppSizes.pw16),
             child: controller.isLoading
                 ? Center(child: CircularProgressIndicator())
                 : Consumer<TasksController>(

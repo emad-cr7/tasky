@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/widgets/custom_text_from_feild.dart';
-import 'package:tasky/modles/taskmodel.dart';
+import '../../models/task_model.dart';
 import '../constants/storage_key.dart';
 import '../enums/task_item_action.dart';
 import '../servies/preferences_manager.dart';
@@ -49,29 +49,29 @@ class TaskItemWidget extends StatelessWidget {
 
           SizedBox(width: AppSizes.w16),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  maxLines: 1,
-                  model.taskName,
-                  style: model.isDone
-                      ? Theme.of(context).textTheme.titleLarge
-                      : Theme.of(context).textTheme.titleMedium,
-                ),
-                if (model.description.isNotEmpty)
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
                     maxLines: 1,
-                    model.description,
-                    style: TextStyle(
-                      color: Color(0xffC6C6C6),
-                      fontSize: AppSizes.sp14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    model.taskName,
+                    style: model.isDone
+                        ? Theme.of(context).textTheme.titleLarge
+                        : Theme.of(context).textTheme.titleMedium,
                   ),
-              ],
-            ),
+                  if (model.description.isNotEmpty)
+                    Text(
+                      maxLines: 1,
+                      model.description,
+                      style: TextStyle(
+                        color: Color(0xffC6C6C6),
+                        fontSize: AppSizes.sp14,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                ],
+              ),
           ),
           PopupMenuButton<TaskItemAction>(
             icon: Icon(
@@ -84,7 +84,7 @@ class TaskItemWidget extends StatelessWidget {
             itemBuilder: (context) => TaskItemAction.values.map((e) {
               return PopupMenuItem<TaskItemAction>(
                 value: e,
-                child: Text(e.name),
+                child: Text(e.name , style: Theme.of(context).textTheme.labelSmall,),
               );
             }).toList(),
 
@@ -160,7 +160,7 @@ class TaskItemWidget extends StatelessWidget {
         return StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return Padding(
-              padding:  EdgeInsets.symmetric(horizontal:AppSizes.h16, vertical:AppSizes.w8),
+              padding:  EdgeInsets.symmetric(horizontal:AppSizes.pw16, vertical:AppSizes.ph8),
               child: Form(
                 key: _key,
                 child: Column(
@@ -177,7 +177,7 @@ class TaskItemWidget extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height:AppSizes.h12),
+                            SizedBox(height:AppSizes.ph30),
                             CustomTextFromField(
                               title: "Task Name",
                               controller: taskNameController,
@@ -188,7 +188,7 @@ class TaskItemWidget extends StatelessWidget {
                                 }
                               },
                             ),
-                            SizedBox(height: AppSizes.h20),
+                            SizedBox(height: AppSizes.ph20),
                             CustomTextFromField(
                               title: "Task Description",
                               controller: taskDescriptionController,
@@ -196,7 +196,7 @@ class TaskItemWidget extends StatelessWidget {
                               hint:
                               "Finish onboarding UI and hand off to devs by Thursday.",
                             ),
-                            SizedBox(height: AppSizes.w8),
+                            SizedBox(height: AppSizes.ph20),
 
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -222,7 +222,7 @@ class TaskItemWidget extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: AppSizes.h20),
+                    Spacer(),
 
                     ElevatedButton.icon(
                       onPressed: () async {
@@ -265,7 +265,6 @@ class TaskItemWidget extends StatelessWidget {
                       label: Text("Edit Task"),
                       icon: Icon(Icons.edit),
                     ),
-                    SizedBox(height: AppSizes.h20)
                   ],
                 ),
               ),

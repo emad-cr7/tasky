@@ -34,7 +34,7 @@ class _UserDetalisState extends State<UserDetalis> {
     return Scaffold(
       appBar: AppBar(title: Text("User Detalis")),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding:  EdgeInsets.all(AppSizes.w16),
         child: Form(
           key: _key,
           child: Column(
@@ -54,7 +54,7 @@ class _UserDetalisState extends State<UserDetalis> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height:AppSizes.ph20),
                       CustomTextFromField(
                         title: "Motivation Quote",
                         controller: motivationController,
@@ -86,7 +86,6 @@ class _UserDetalisState extends State<UserDetalis> {
 
                 child: Text("Save Changes"),
               ),
-              SizedBox(height: AppSizes.ph24,)
             ],
           ),
         ),

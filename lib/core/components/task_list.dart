@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
 import 'package:tasky/core/widgets/animation/custom_animation4.dart';
-import '../../modles/taskmodel.dart';
-import '../widgets/animation/custom_animation.dart';
+
+import '../../models/task_model.dart';
 
 class TaskList extends StatelessWidget {
   TaskList({

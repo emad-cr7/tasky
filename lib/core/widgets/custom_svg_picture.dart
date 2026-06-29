@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomSvgPicture extends StatelessWidget {
   const CustomSvgPicture({
@@ -25,15 +26,15 @@ class CustomSvgPicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      path,
-      height: height,
-      width: width,
-      colorFilter: withColorFilter
-          ? ColorFilter.mode(
-              Theme.of(context).colorScheme.secondary,
-              BlendMode.srcIn,
-            )
-          : null,
-    );
+        path,
+        height: height,
+        width: width,
+        colorFilter: withColorFilter
+            ? ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
+              )
+            : null,
+      );
   }
 }

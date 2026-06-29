@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import '../../../core/widgets/custom_svg_picture.dart';
 import '../user_detalis.dart';
 class UserDetailsComponent extends StatelessWidget {
@@ -12,7 +13,7 @@ class UserDetailsComponent extends StatelessWidget {
       children: [
         Row(
           children: [
-            SizedBox(width: 2),
+            SizedBox(width: AppSizes.w2),
             Expanded(
                 child: ListTile(
                   title: Text("User Details"),
@@ -45,7 +46,6 @@ class UserDetailsComponent extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 5),
         Divider(thickness: 1),
 
       ],

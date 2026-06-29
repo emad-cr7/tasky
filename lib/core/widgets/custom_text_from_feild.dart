@@ -30,13 +30,13 @@ class CustomTextFromField extends StatelessWidget {
           title,
           style: Theme.of(
             context,
-          ).textTheme.displaySmall!.copyWith(fontSize: AppSizes.sp16),
+          ).textTheme.labelSmall
         ),
         SizedBox(height: AppSizes.h8),
         TextFormField(
           maxLines: maxLines,
           controller: controller,
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.labelSmall,
 
           validator: validator != null
               ? (String? value) => validator!(value)
