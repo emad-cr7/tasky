@@ -7,8 +7,8 @@ class CustomSvgPicture extends StatelessWidget {
     super.key,
     required this.path,
     this.withColorFilter = true,
-     this.height,
-     this.width,
+    this.height,
+    this.width,
   });
 
   final String path;
@@ -19,22 +19,22 @@ class CustomSvgPicture extends StatelessWidget {
   const CustomSvgPicture.withColor({
     super.key,
     required this.path,
-     this.height,
-     this.width,
+    this.height,
+    this.width,
   }) : withColorFilter = false;
 
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-        path,
-        height: height,
-        width: width,
-        colorFilter: withColorFilter
-            ? ColorFilter.mode(
-                Theme.of(context).colorScheme.secondary,
-                BlendMode.srcIn,
-              )
-            : null,
-      );
+      path,
+      height: height,
+      width: width,
+      colorFilter: withColorFilter
+          ? ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            )
+          : null,
+    );
   }
 }

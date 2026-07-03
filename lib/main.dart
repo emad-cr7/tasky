@@ -12,6 +12,8 @@ import 'core/theme/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
+
   await PreferencesManager().init();
 
   ThemeController().init();

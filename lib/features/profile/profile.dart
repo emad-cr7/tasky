@@ -40,7 +40,7 @@ class Profile extends StatelessWidget {
                                 children: [
                                   CircleAvatar(
                                     backgroundImage:
-                                        controller.userImage == null
+                                    controller.userImage == null
                                         ? AssetImage(
                                             "assets/images/profile.png",
                                           )
