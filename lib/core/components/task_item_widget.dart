@@ -7,7 +7,7 @@ import 'package:tasky/core/widgets/custom_text_from_feild.dart';
 import '../../models/task_model.dart';
 import '../constants/storage_key.dart';
 import '../enums/task_item_action.dart';
-import '../servies/preferences_manager.dart';
+import '../servies/file_storage_manager.dart';
 import '../widgets/custom_check_box.dart';
 
 class TaskItemWidget extends StatelessWidget {
@@ -231,14 +231,7 @@ class TaskItemWidget extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: () async {
                         if (_key.currentState?.validate() ?? false) {
-                          final taskJson = await PreferencesManager().getString(
-                            StorageKey.tasks,
-                          );
-
-                          List<dynamic> listTasks = [];
-                          if (taskJson != null) {
-                            listTasks = jsonDecode(taskJson);
-                          }
+                          List<dynamic> listTasks = await FileStorageManager().loadTask();
 
                           TaskModel newModel = TaskModel(
                             id: model.id,
@@ -256,12 +249,7 @@ class TaskItemWidget extends StatelessWidget {
 
                           listTasks[index] = newModel.toJson();
 
-                          final taskEncode = jsonEncode(listTasks);
-
-                          await PreferencesManager().setString(
-                            "tasks",
-                            taskEncode,
-                          );
+                          await FileStorageManager().saveTasks(listTasks);
 
                           Navigator.of(context).pop(true);
                         }

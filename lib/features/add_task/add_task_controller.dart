@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import '../../core/constants/storage_key.dart';
+import '../../core/servies/file_storage_manager.dart';
 import '../../core/servies/preferences_manager.dart';
 import '../../models/task_model.dart';
 
@@ -14,7 +13,7 @@ class AddTaskController with ChangeNotifier {
 
   void addTask(BuildContext context) async {
     if (key.currentState?.validate() ?? false) {
-      final taskJson = await PreferencesManager().getString(StorageKey.tasks);
+      final taskJson =  PreferencesManager().getString(StorageKey.tasks);
 
       List<dynamic> listTasks = [];
       if (taskJson != null) {
@@ -30,6 +29,11 @@ class AddTaskController with ChangeNotifier {
 
       listTasks.add(model.toJson());
 
+
+      FileStorageManager().saveTasks(listTasks);
+
+
+
       final taskEncode = jsonEncode(listTasks);
       await PreferencesManager().setString(StorageKey.tasks, taskEncode);
 
@@ -39,6 +43,7 @@ class AddTaskController with ChangeNotifier {
 
   void toggle(bool value) {
     isHighPriority = value ;
+
     notifyListeners();
   }
 

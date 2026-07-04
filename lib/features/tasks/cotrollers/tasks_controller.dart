@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../core/constants/storage_key.dart';
+import '../../../core/servies/file_storage_manager.dart';
 import '../../../core/servies/preferences_manager.dart';
 import '../../../models/task_model.dart';
 import '../../welcome/welcome_screen.dart';
@@ -21,25 +22,21 @@ class TasksController with ChangeNotifier {
     loadTask();
   }
 
-  Future<void> loadTask() async {
-    final finalTask = PreferencesManager().getString(StorageKey.tasks);
-    if (finalTask != null) {
-      final taskDecode = jsonDecode(finalTask) as List<dynamic>;
-      tasks = taskDecode.map((element) => TaskModel.fromJSON(element)).toList();
-
+  void loadTask() async {
+    final tasksDate = await FileStorageManager().loadTask();
+      tasks = tasksDate.map((element) => TaskModel.fromJSON(element)).toList();
       loadData();
       _calculatePecent();
-    }
+
     isLoading = false;
+
     notifyListeners();
   }
 
   loadData() {
     todoTasks = tasks.where((e) => !e.isDone).toList();
     completed = tasks.where((e) => e.isDone).toList();
-    highPriorityTasks = tasks
-        .where((element) => element.isHighPriority == true)
-        .toList()
+    highPriorityTasks = tasks.where((element) => element.isHighPriority == true).toList()
         .reversed
         .toList();
   }
@@ -50,9 +47,8 @@ class TasksController with ChangeNotifier {
 
     loadData();
     _calculatePecent();
-
     final updatedTask = tasks.map((element) => element.toJson()).toList();
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
+    FileStorageManager().saveTasks(updatedTask);
     notifyListeners();
   }
 
@@ -70,7 +66,7 @@ class TasksController with ChangeNotifier {
     _calculatePecent();
 
     final updatedTask = tasks.map((element) => element.toJson()).toList();
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
+    FileStorageManager().saveTasks(updatedTask);
 
     notifyListeners();
   }
