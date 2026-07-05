@@ -16,7 +16,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
 
   await PreferencesManager().init();
-  await FileStorageManager().init();
+  await HiveStorageManager().init();
 
   ThemeController().init();
   String? username = PreferencesManager().getString(StorageKey.username);

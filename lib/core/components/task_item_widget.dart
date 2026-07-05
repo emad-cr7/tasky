@@ -231,7 +231,7 @@ class TaskItemWidget extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: () async {
                         if (_key.currentState?.validate() ?? false) {
-                          List<dynamic> listTasks = await FileStorageManager().loadTask();
+                          List<TaskModel> listTasks =  HiveStorageManager().loadTask();
 
                           TaskModel newModel = TaskModel(
                             id: model.id,
@@ -242,14 +242,14 @@ class TaskItemWidget extends StatelessWidget {
                           );
 
                           final item = listTasks.firstWhere(
-                            (e) => e['id'] == model.id,
+                            (e) => e.id == model.id,
                           );
 
                           final int index = listTasks.indexOf(item);
 
-                          listTasks[index] = newModel.toJson();
+                          listTasks[index] = newModel;
 
-                          await FileStorageManager().saveTasks(listTasks);
+                          await HiveStorageManager().saveTasks(listTasks);
 
                           Navigator.of(context).pop(true);
                         }

@@ -1,10 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../../../core/constants/storage_key.dart';
 import '../../../core/servies/file_storage_manager.dart';
-import '../../../core/servies/preferences_manager.dart';
 import '../../../models/task_model.dart';
-import '../../welcome/welcome_screen.dart';
 
 class TasksController with ChangeNotifier {
   bool isLoading = true;
@@ -23,8 +19,7 @@ class TasksController with ChangeNotifier {
   }
 
   void loadTask() async {
-    final tasksDate = await FileStorageManager().loadTask();
-      tasks = tasksDate.map((element) => TaskModel.fromJSON(element)).toList();
+    tasks =  HiveStorageManager().loadTask();
       loadData();
       _calculatePecent();
 
@@ -47,8 +42,7 @@ class TasksController with ChangeNotifier {
 
     loadData();
     _calculatePecent();
-    final updatedTask = tasks.map((element) => element.toJson()).toList();
-    FileStorageManager().saveTasks(updatedTask);
+    HiveStorageManager().saveTasks(tasks);
     notifyListeners();
   }
 
@@ -65,33 +59,12 @@ class TasksController with ChangeNotifier {
     loadData();
     _calculatePecent();
 
-    final updatedTask = tasks.map((element) => element.toJson()).toList();
-    FileStorageManager().saveTasks(updatedTask);
+    HiveStorageManager().saveTasks(tasks);
 
     notifyListeners();
   }
 
-  void clearTasks(BuildContext context) async {
-    await PreferencesManager().remove(StorageKey.username);
-    await PreferencesManager().remove(StorageKey.motivation);
-    await PreferencesManager().remove(StorageKey.tasks);
-    await PreferencesManager().remove(StorageKey.userImage);
-
-    tasks.clear();
-    todoTasks.clear();
-    completed.clear();
-    highPriorityTasks.clear();
-
-    _calculatePecent();
-
-    notifyListeners();
-
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => WelcomeScreen(),
-      ),
-          (route) => false,
-    );
+  clearTasks(){
+    loadTask();
   }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/servies/file_storage_manager.dart';
+import 'package:tasky/features/welcome/welcome_screen.dart';
 
 import '../../../core/constants/app_sizes.dart';
 import '../../tasks/cotrollers/tasks_controller.dart';
 
 class LogOutComponent extends StatelessWidget {
   const LogOutComponent({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -16,39 +17,32 @@ class LogOutComponent extends StatelessWidget {
         Row(
           children: [
             Expanded(
-                child: ListTile(
-                  title: Text(
-                    "Log Out",
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: AppSizes.sp20,
-                      fontWeight: FontWeight.w400,
-                    ),
+              child: ListTile(
+                title: Text(
+                  "Log Out",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: AppSizes.sp20,
+                    fontWeight: FontWeight.w400,
                   ),
-                  contentPadding: EdgeInsets.zero,
-                  leading: SvgPicture.asset(
-                    "assets/images/logout_Icon.svg",
-                    colorFilter: ColorFilter.mode(
-                      Colors.red,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                
-                  trailing: SvgPicture.asset(
-                    "assets/images/back_Icon.svg",
-                    colorFilter: ColorFilter.mode(
-                      Colors.red,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  onTap: () async {
-                    _showAlertDialog(context);
-                  },
                 ),
+                contentPadding: EdgeInsets.zero,
+                leading: SvgPicture.asset(
+                  "assets/images/logout_Icon.svg",
+                  colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
+                ),
+
+                trailing: SvgPicture.asset(
+                  "assets/images/back_Icon.svg",
+                  colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
+                ),
+                onTap: () async {
+                  _showAlertDialog(context);
+                },
               ),
+            ),
           ],
         ),
-
       ],
     );
   }
@@ -76,7 +70,18 @@ void _showAlertDialog(BuildContext context) {
 
             TextButton(
               onPressed: () async {
-                context.read<TasksController>().clearTasks(context);
+                await HiveStorageManager().clear();
+
+                context.read<TasksController>().clearTasks();
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return WelcomeScreen();
+                    },
+                  ),
+                );
               },
 
               style: TextButton.styleFrom(foregroundColor: Colors.red),

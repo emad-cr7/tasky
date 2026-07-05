@@ -80,7 +80,7 @@ class Add_task extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton.icon(
-                      onPressed: () async {
+                      onPressed: ()  {
                         context.read<AddTaskController>().addTask(context);
                       },
                       label: Text("Add Task"),

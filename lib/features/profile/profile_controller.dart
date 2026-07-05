@@ -23,7 +23,6 @@ class ProfileController with ChangeNotifier {
     motivation = PreferencesManager().getString(StorageKey.motivation);
     userImage = PreferencesManager().getString(StorageKey.userImage);
     isLoading = false;
-
     notifyListeners();
   }
   void saveImage(XFile file) async {
@@ -33,6 +32,8 @@ class ProfileController with ChangeNotifier {
     notifyListeners();
 
   }
+
+
 
   void showImageSourcDialog(BuildContext context, Function(XFile) selectedFile) {
     showDialog(
