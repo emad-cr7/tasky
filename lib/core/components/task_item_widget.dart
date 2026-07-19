@@ -159,109 +159,123 @@ class TaskItemWidget extends StatelessWidget {
     return showModalBottomSheet<bool>(
       context: context,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, void Function(void Function()) setState) {
-            return Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSizes.pw16,
-                vertical: AppSizes.ph8,
-              ),
-              child: Form(
-                key: _key,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Divider(
-                      thickness: 5,
-                      indent: 150,
-                      endIndent: 150,
-                      radius: BorderRadius.circular(AppSizes.r50),
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: AppSizes.ph30),
-                            CustomTextFromField(
-                              title: "Task Name",
-                              controller: taskNameController,
-                              hint: "Finish UI design for login screen",
-                              validator: (String? value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return "Please Enter Task Name";
-                                }
-                              },
-                            ),
-                            SizedBox(height: AppSizes.ph20),
-                            CustomTextFromField(
-                              title: "Task Description",
-                              controller: taskDescriptionController,
-                              maxLines: 5,
-                              hint:
-                                  "Finish onboarding UI and hand off to devs by Thursday.",
-                            ),
-                            SizedBox(height: AppSizes.ph20),
+        return AnimatedPadding(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: StatefulBuilder(
+            builder: (BuildContext context, void Function(void Function()) setState) {
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSizes.pw16,
+                  vertical: AppSizes.ph8,
+                ),
+                child: Form(
+                  key: _key,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Divider(
+                        thickness: 5,
+                        indent: 150,
+                        endIndent: 150,
+                        radius: BorderRadius.circular(AppSizes.r50),
+                      ),
+                      Flexible(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: AppSizes.ph30),
+                              CustomTextFromField(
+                                title: "Task Name",
+                                controller: taskNameController,
+                                hint: "Finish UI design for login screen",
+                                validator: (String? value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Please Enter Task Name";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: AppSizes.ph20),
+                              CustomTextFromField(
+                                title: "Task Description",
+                                controller: taskDescriptionController,
+                                maxLines: 5,
+                                hint:
+                                "Finish onboarding UI and hand off to devs by Thursday.",
+                              ),
+                              SizedBox(height: AppSizes.ph20),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "High Priority ",
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.titleMedium,
-                                ),
-                                Switch(
-                                  value: isHighPriority,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      isHighPriority = value;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "High Priority",
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.titleMedium,
+                                  ),
+                                  Switch(
+                                    value: isHighPriority,
+                                    onChanged: (bool value) {
+                                      setState(() {
+                                        isHighPriority = value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: AppSizes.ph20),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
 
-                    ElevatedButton.icon(
-                      onPressed: () async {
-                        if (_key.currentState?.validate() ?? false) {
-                          List<TaskModel> listTasks =  HiveStorageManager().loadTask();
+                      ElevatedButton.icon(
+                        onPressed: () async {
+                          if (_key.currentState?.validate() ?? false) {
+                            List<TaskModel> listTasks = HiveStorageManager().loadTask();
 
-                          TaskModel newModel = TaskModel(
-                            id: model.id,
-                            taskName: taskNameController.text,
-                            description: taskDescriptionController.text,
-                            isHighPriority: isHighPriority,
-                            isDone: model.isDone,
-                          );
+                            TaskModel newModel = TaskModel(
+                              id: model.id,
+                              taskName: taskNameController.text,
+                              description: taskDescriptionController.text,
+                              isHighPriority: isHighPriority,
+                              isDone: model.isDone,
+                            );
 
-                          final item = listTasks.firstWhere(
-                            (e) => e.id == model.id,
-                          );
+                            final item = listTasks.firstWhere(
+                                  (e) => e.id == model.id,
+                            );
 
-                          final int index = listTasks.indexOf(item);
+                            final int index = listTasks.indexOf(item);
 
-                          listTasks[index] = newModel;
+                            listTasks[index] = newModel;
 
-                          await HiveStorageManager().saveTasks(listTasks);
+                            await HiveStorageManager().saveTasks(listTasks);
 
-                          Navigator.of(context).pop(true);
-                        }
-                      },
-                      label: Text("Edit Task"),
-                      icon: Icon(Icons.edit),
-                    ),
-                  ],
+                            Navigator.of(context).pop(true);
+                          }
+                        },
+                        label: const Text("Edit Task"),
+                        icon: const Icon(Icons.edit),
+                      ),
+
+                      SizedBox(height: AppSizes.ph8),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         );
       },
     );

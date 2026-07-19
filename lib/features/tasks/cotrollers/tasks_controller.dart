@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/storage_key.dart';
 import '../../../core/servies/file_storage_manager.dart';
+import '../../../core/servies/preferences_manager.dart';
 import '../../../models/task_model.dart';
 
 class TasksController with ChangeNotifier {
@@ -19,25 +21,27 @@ class TasksController with ChangeNotifier {
   }
 
   void loadTask() async {
-    tasks =  HiveStorageManager().loadTask();
-      loadData();
-      _calculatePecent();
+    tasks = HiveStorageManager().loadTask();
+    loadData();
+    _calculatePecent();
 
     isLoading = false;
-
     notifyListeners();
   }
 
   loadData() {
     todoTasks = tasks.where((e) => !e.isDone).toList();
     completed = tasks.where((e) => e.isDone).toList();
-    highPriorityTasks = tasks.where((element) => element.isHighPriority == true).toList()
+    highPriorityTasks = tasks
+        .where((element) => element.isHighPriority == true)
+        .toList()
         .reversed
         .toList();
   }
 
   void doneTasks(bool? value, int id) async {
     final index = tasks.indexWhere((e) => e.id == id);
+
     tasks[index].isDone = value ?? false;
 
     loadData();
@@ -64,7 +68,8 @@ class TasksController with ChangeNotifier {
     notifyListeners();
   }
 
-  clearTasks(){
+  clearTasks() {
+    PreferencesManager().remove(StorageKey.userImage);
     loadTask();
   }
 }

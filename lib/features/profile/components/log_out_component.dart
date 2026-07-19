@@ -6,6 +6,7 @@ import 'package:tasky/features/welcome/welcome_screen.dart';
 
 import '../../../core/constants/app_sizes.dart';
 import '../../tasks/cotrollers/tasks_controller.dart';
+import '../profile_controller.dart';
 
 class LogOutComponent extends StatelessWidget {
   const LogOutComponent({super.key});
